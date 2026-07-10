@@ -3,533 +3,416 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Formulário de Admissão – Equilibryum</title>
+<title>Ficha de Admissão – Equilibryum</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#222;min-height:100vh;}
-.topo{background:linear-gradient(135deg,#1f5c44,#2e7d5e);color:#fff;padding:28px 0;text-align:center;}
-.topo h1{font-size:22px;font-weight:800;letter-spacing:.5px;margin-bottom:6px;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#222;}
+.topo{background:linear-gradient(135deg,#1f5c44,#2e7d5e);color:#fff;padding:28px 16px;text-align:center;}
+.topo h1{font-size:20px;font-weight:800;margin-bottom:6px;}
 .topo p{font-size:13px;opacity:.85;}
-.container{max-width:720px;margin:32px auto;padding:0 16px 60px;}
-.card{background:#fff;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.09);margin-bottom:22px;overflow:hidden;}
-.card-header{background:#e8f5ee;padding:14px 22px;border-bottom:2px solid #c8e6d4;display:flex;align-items:center;gap:10px;}
-.card-header span.icon{font-size:20px;}
-.card-header h2{font-size:14px;font-weight:700;color:#1f5c44;}
-.card-body{padding:20px 22px;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.container{max-width:700px;margin:24px auto;padding:0 14px 60px;}
+.card{background:#fff;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.08);margin-bottom:18px;overflow:hidden;}
+.card-header{background:#e8f5ee;padding:13px 20px;border-bottom:2px solid #c8e6d4;display:flex;align-items:center;gap:8px;}
+.card-header h2{font-size:13.5px;font-weight:700;color:#1f5c44;}
+.card-body{padding:18px 20px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
 .form-row.full{grid-template-columns:1fr;}
 .form-row.tri{grid-template-columns:1fr 1fr 1fr;}
-@media(max-width:600px){.form-row,.form-row.tri{grid-template-columns:1fr;}}
-.fg{display:flex;flex-direction:column;gap:5px;}
-label{font-size:12px;font-weight:700;color:#444;text-transform:uppercase;letter-spacing:.4px;}
-label .req{color:#c0392b;margin-left:2px;}
-input[type=text],input[type=date],input[type=email],input[type=tel],input[type=number],select,textarea{
-  width:100%;padding:9px 12px;border:1.5px solid #d0dce6;border-radius:8px;
-  font-size:13.5px;font-family:inherit;background:#fafcfe;transition:border .2s;
-}
+@media(max-width:560px){.form-row,.form-row.tri{grid-template-columns:1fr;}}
+.fg{display:flex;flex-direction:column;gap:4px;}
+label{font-size:11.5px;font-weight:700;color:#444;text-transform:uppercase;letter-spacing:.3px;}
+label .req{color:#c0392b;}
+input,select,textarea{width:100%;padding:9px 11px;border:1.5px solid #d0dce6;border-radius:8px;font-size:13.5px;font-family:inherit;background:#fafcfe;transition:border .2s;}
 input:focus,select:focus,textarea:focus{outline:none;border-color:#2e7d5e;background:#fff;}
-textarea{resize:vertical;min-height:70px;}
-.upload-area{border:2px dashed #aac8b8;border-radius:10px;padding:18px 14px;text-align:center;cursor:pointer;background:#f7fbf9;transition:.2s;position:relative;}
-.upload-area:hover{border-color:#2e7d5e;background:#edf7f2;}
-.upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.upload-area .icon{font-size:28px;margin-bottom:6px;}
-.upload-area p{font-size:12.5px;color:#555;}
-.upload-area .label{font-size:13px;font-weight:700;color:#1f5c44;margin-bottom:4px;}
-.file-list{margin-top:8px;display:flex;flex-direction:column;gap:5px;}
-.file-item{display:flex;align-items:center;gap:8px;background:#e8f5ee;border-radius:7px;padding:6px 10px;font-size:12.5px;}
-.file-item .fname{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#1f5c44;font-weight:600;}
-.file-item .rm{background:none;border:none;cursor:pointer;color:#c0392b;font-size:16px;line-height:1;}
-.aviso{background:#fff8e1;border:1px solid #ffe082;border-radius:9px;padding:11px 14px;font-size:12.5px;color:#7b6000;margin-bottom:18px;}
-.aviso strong{color:#e65100;}
-.btn-submit{width:100%;padding:15px;background:linear-gradient(135deg,#1f5c44,#2e7d5e);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:800;cursor:pointer;letter-spacing:.5px;transition:.2s;margin-top:8px;}
-.btn-submit:hover{opacity:.92;transform:translateY(-1px);}
-.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;}
-#sucesso{display:none;background:#e8f5ee;border:2px solid #2e7d5e;border-radius:12px;padding:32px;text-align:center;}
-#sucesso h2{color:#1f5c44;font-size:20px;margin-bottom:8px;}
-#sucesso p{color:#444;font-size:14px;}
-.step-bar{display:flex;gap:0;margin-bottom:28px;}
-.step{flex:1;text-align:center;padding:10px 4px;font-size:11px;font-weight:700;color:#999;border-bottom:3px solid #e0e0e0;transition:.2s;}
-.step.ativo{color:#1f5c44;border-color:#1f5c44;}
-.step.done{color:#2e7d5e;border-color:#2e7d5e;}
+textarea{resize:vertical;min-height:65px;}
+.upload-box{border:2px dashed #aac8b8;border-radius:10px;padding:16px;text-align:center;background:#f7fbf9;position:relative;transition:.2s;cursor:pointer;}
+.upload-box:hover{border-color:#2e7d5e;background:#edf7f2;}
+.upload-box input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.upload-box .ico{font-size:24px;margin-bottom:4px;}
+.upload-box p{font-size:12px;color:#666;}
+.upload-box strong{font-size:12.5px;color:#1f5c44;display:block;margin-bottom:3px;}
+.file-list{margin-top:7px;display:flex;flex-direction:column;gap:4px;}
+.fi{display:flex;align-items:center;gap:7px;background:#e8f5ee;border-radius:6px;padding:5px 9px;font-size:12px;}
+.fi span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#1f5c44;font-weight:600;}
+.fi button{background:none;border:none;cursor:pointer;color:#c0392b;font-size:15px;}
+.aviso{background:#e3f2fd;border:1px solid #90caf9;border-radius:9px;padding:11px 14px;font-size:12.5px;color:#1565c0;margin-bottom:18px;}
+.btn{width:100%;padding:15px;background:linear-gradient(135deg,#1f5c44,#2e7d5e);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer;margin-top:6px;transition:.2s;}
+.btn:hover{opacity:.9;transform:translateY(-1px);}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+#tela-sucesso{display:none;text-align:center;padding:48px 20px;background:#fff;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.08);}
+#tela-sucesso .big{font-size:56px;margin-bottom:14px;}
+#tela-sucesso h2{color:#1f5c44;font-size:20px;margin-bottom:8px;}
+#tela-sucesso p{color:#555;font-size:14px;line-height:1.7;}
+.prog{width:100%;background:#e0e0e0;border-radius:8px;height:8px;margin:14px 0 6px;}
+.prog-bar{height:8px;background:linear-gradient(90deg,#1f5c44,#2e7d5e);border-radius:8px;width:0;transition:width .4s;}
+#prog-txt{font-size:12px;color:#555;text-align:center;}
 </style>
 </head>
 <body>
 
 <div class="topo">
-  <h1>📋 Formulário de Admissão</h1>
-  <p>Preencha todos os campos e anexe seus documentos para concluir sua contratação.</p>
+  <h1>📋 Ficha de Admissão</h1>
+  <p>Preencha todos os campos e envie seus documentos. Os dados chegam diretamente ao RH.</p>
 </div>
 
 <div class="container">
 
-  <div class="aviso">
-    ⏱️ <strong>Prazo:</strong> Envie este formulário em até <strong>48 horas</strong> após receber o link.
-    Todos os campos marcados com <strong style="color:#c0392b">*</strong> são obrigatórios.<br><br>
-    📱 Ao final, você receberá um arquivo para enviar ao RH pelo WhatsApp.
+<div class="aviso">
+  📌 Todos os campos marcados com <strong style="color:#c0392b">*</strong> são obrigatórios.
+  Após enviar, seus dados chegam automaticamente ao RH — nenhum arquivo precisa ser enviado manualmente.
+</div>
+
+<form id="form" onsubmit="enviar(event)">
+
+  <div class="card">
+    <div class="card-header"><h2>👤 1. Dados Pessoais</h2></div>
+    <div class="card-body">
+      <div class="form-row full">
+        <div class="fg"><label>Nome Completo <span class="req">*</span></label>
+          <input name="nome" required placeholder="Seu nome completo"></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>CPF <span class="req">*</span></label>
+          <input name="cpf" required placeholder="000.000.000-00" oninput="mask(this,'cpf')"></div>
+        <div class="fg"><label>RG</label>
+          <input name="rg" placeholder="00.000.000-0"></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Data de Nascimento <span class="req">*</span></label>
+          <input type="date" name="nascimento" required></div>
+        <div class="fg"><label>Sexo</label>
+          <select name="sexo">
+            <option value="">Selecione</option>
+            <option>Masculino</option><option>Feminino</option><option>Outro</option>
+          </select></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Estado Civil</label>
+          <select name="estado_civil">
+            <option value="">Selecione</option>
+            <option>Solteiro(a)</option><option>Casado(a)</option>
+            <option>Divorciado(a)</option><option>Viúvo(a)</option><option>União Estável</option>
+          </select></div>
+        <div class="fg"><label>Naturalidade</label>
+          <input name="naturalidade" placeholder="Cidade – UF"></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Nome da Mãe</label>
+          <input name="nome_mae" placeholder="Nome completo"></div>
+        <div class="fg"><label>Nome do Pai</label>
+          <input name="nome_pai" placeholder="Nome completo"></div>
+      </div>
+    </div>
   </div>
 
-  <form id="form-admissao" onsubmit="submeter(event)" enctype="multipart/form-data">
-
-    <!-- 1. DADOS PESSOAIS -->
-    <div class="card">
-      <div class="card-header"><span class="icon">👤</span><h2>1. Dados Pessoais</h2></div>
-      <div class="card-body">
-        <div class="form-row full">
-          <div class="fg"><label>Nome Completo <span class="req">*</span></label>
-            <input type="text" id="f-nome" required placeholder="Seu nome completo"></div>
-        </div>
-        <div class="form-row">
-          <div class="fg"><label>CPF <span class="req">*</span></label>
-            <input type="text" id="f-cpf" required placeholder="000.000.000-00" maxlength="14" oninput="mascara(this,'cpf')"></div>
-          <div class="fg"><label>RG</label>
-            <input type="text" id="f-rg" placeholder="Ex.: 12.345.678-9"></div>
-        </div>
-        <div class="form-row">
-          <div class="fg"><label>Data de Nascimento <span class="req">*</span></label>
-            <input type="date" id="f-nas" required></div>
-          <div class="fg"><label>Sexo</label>
-            <select id="f-sex">
-              <option value="">Selecione</option>
-              <option value="M">Masculino</option>
-              <option value="F">Feminino</option>
-              <option value="O">Outro</option>
-            </select></div>
-        </div>
-        <div class="form-row">
-          <div class="fg"><label>Estado Civil</label>
-            <select id="f-ec">
-              <option value="">Selecione</option>
-              <option value="Solteiro(a)">Solteiro(a)</option>
-              <option value="Casado(a)">Casado(a)</option>
-              <option value="Divorciado(a)">Divorciado(a)</option>
-              <option value="Viúvo(a)">Viúvo(a)</option>
-              <option value="União Estável">União Estável</option>
-            </select></div>
-          <div class="fg"><label>Nacionalidade</label>
-            <input type="text" id="f-nac" value="Brasileiro(a)" placeholder="Brasileiro(a)"></div>
-        </div>
-        <div class="form-row">
-          <div class="fg"><label>Nome da Mãe</label>
-            <input type="text" id="f-mae" placeholder="Nome completo da mãe"></div>
-          <div class="fg"><label>Nome do Pai</label>
-            <input type="text" id="f-pai" placeholder="Nome completo do pai"></div>
-        </div>
+  <div class="card">
+    <div class="card-header"><h2>📞 2. Contato</h2></div>
+    <div class="card-body">
+      <div class="form-row">
+        <div class="fg"><label>WhatsApp <span class="req">*</span></label>
+          <input name="telefone" required placeholder="(11) 99999-9999" oninput="mask(this,'tel')"></div>
+        <div class="fg"><label>E-mail <span class="req">*</span></label>
+          <input type="email" name="email" required placeholder="seu@email.com"></div>
       </div>
     </div>
-
-    <!-- 2. CONTATO -->
-    <div class="card">
-      <div class="card-header"><span class="icon">📞</span><h2>2. Contato</h2></div>
-      <div class="card-body">
-        <div class="form-row">
-          <div class="fg"><label>Telefone / WhatsApp <span class="req">*</span></label>
-            <input type="tel" id="f-tel" required placeholder="(11) 99999-9999" oninput="mascara(this,'tel')"></div>
-          <div class="fg"><label>E-mail <span class="req">*</span></label>
-            <input type="email" id="f-email" required placeholder="seu@email.com"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. ENDEREÇO -->
-    <div class="card">
-      <div class="card-header"><span class="icon">📍</span><h2>3. Endereço</h2></div>
-      <div class="card-body">
-        <div class="form-row">
-          <div class="fg"><label>CEP <span class="req">*</span></label>
-            <input type="text" id="f-cep" required placeholder="00000-000" maxlength="9" oninput="mascara(this,'cep');buscarCEP(this)"></div>
-          <div class="fg"><label>Cidade</label>
-            <input type="text" id="f-cidade" placeholder="São Paulo"></div>
-        </div>
-        <div class="form-row full">
-          <div class="fg"><label>Endereço Completo <span class="req">*</span></label>
-            <input type="text" id="f-end" required placeholder="Rua, número, bairro, cidade – UF"></div>
-        </div>
-        <div class="form-row">
-          <div class="fg"><label>Complemento</label>
-            <input type="text" id="f-comp" placeholder="Apto, bloco, etc."></div>
-          <div class="fg"><label>Estado (UF)</label>
-            <input type="text" id="f-uf" maxlength="2" placeholder="SP"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4. DOCUMENTOS TRABALHISTAS -->
-    <div class="card">
-      <div class="card-header"><span class="icon">📄</span><h2>4. Documentos Trabalhistas</h2></div>
-      <div class="card-body">
-        <div class="form-row">
-          <div class="fg"><label>PIS / NIT</label>
-            <input type="text" id="f-pis" placeholder="000.00000.00-0"></div>
-          <div class="fg"><label>CTPS Nº / Série</label>
-            <input type="text" id="f-ctps" placeholder="Ex.: 123456 / 001-SP"></div>
-        </div>
-        <div class="form-row">
-          <div class="fg"><label>Título de Eleitor</label>
-            <input type="text" id="f-titulo" placeholder="Número do título"></div>
-          <div class="fg"><label>Certidão Militar (homens)</label>
-            <input type="text" id="f-militar" placeholder="Nº da certidão"></div>
-        </div>
-        <div class="form-row">
-          <div class="fg"><label>CNH (se possuir)</label>
-            <input type="text" id="f-cnh" placeholder="Número da CNH"></div>
-          <div class="fg"><label>Categoria CNH</label>
-            <select id="f-cnh-cat">
-              <option value="">Não possui</option>
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="AB">AB</option>
-              <option value="C">C</option>
-              <option value="D">D</option>
-              <option value="E">E</option>
-            </select></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 5. DADOS BANCÁRIOS -->
-    <div class="card">
-      <div class="card-header"><span class="icon">🏦</span><h2>5. Dados Bancários</h2></div>
-      <div class="card-body">
-        <div class="form-row tri">
-          <div class="fg"><label>Banco</label>
-            <input type="text" id="f-banco" placeholder="Ex.: Nubank, Caixa"></div>
-          <div class="fg"><label>Agência</label>
-            <input type="text" id="f-agencia" placeholder="0000"></div>
-          <div class="fg"><label>Conta</label>
-            <input type="text" id="f-conta" placeholder="00000-0"></div>
-        </div>
-        <div class="form-row">
-          <div class="fg"><label>Tipo de Conta</label>
-            <select id="f-tipo-conta">
-              <option value="Corrente">Conta Corrente</option>
-              <option value="Poupança">Conta Poupança</option>
-              <option value="Pagamento">Conta de Pagamento</option>
-            </select></div>
-          <div class="fg"><label>Chave PIX</label>
-            <input type="text" id="f-pix" placeholder="CPF, e-mail ou telefone"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 6. UNIFORMES -->
-    <div class="card">
-      <div class="card-header"><span class="icon">👕</span><h2>6. Tamanhos de Uniforme</h2></div>
-      <div class="card-body">
-        <div class="form-row">
-          <div class="fg"><label>Camiseta / Polo</label>
-            <select id="f-camisa">
-              <option value="">Selecione</option>
-              <option>PP</option><option>P</option><option>M</option>
-              <option>G</option><option>GG</option><option>XGG</option>
-            </select></div>
-          <div class="fg"><label>Calça</label>
-            <select id="f-calca">
-              <option value="">Selecione</option>
-              <option>34</option><option>36</option><option>38</option><option>40</option>
-              <option>42</option><option>44</option><option>46</option><option>48</option><option>50</option>
-            </select></div>
-        </div>
-        <div class="form-row">
-          <div class="fg"><label>Calçado (nº)</label>
-            <input type="number" id="f-calcado" min="33" max="48" placeholder="Ex.: 40"></div>
-          <div class="fg"><label>Jaleco (se aplicável)</label>
-            <select id="f-jaleco">
-              <option value="">Não se aplica</option>
-              <option>PP</option><option>P</option><option>M</option>
-              <option>G</option><option>GG</option><option>XGG</option>
-            </select></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 7. ANEXOS -->
-    <div class="card">
-      <div class="card-header"><span class="icon">📎</span><h2>7. Documentos Obrigatórios</h2></div>
-      <div class="card-body">
-        <p style="font-size:12.5px;color:#666;margin-bottom:16px;">Anexe fotos ou PDFs legíveis. Formatos aceitos: JPG, PNG, PDF.</p>
-
-        <div id="docs-container"></div>
-
-        <div style="margin-top:14px;">
-          <label style="font-size:12.5px;font-weight:600;color:#444;margin-bottom:8px;display:block;">Observações adicionais</label>
-          <textarea id="f-obs" placeholder="Informe qualquer dado adicional relevante..." rows="3"></textarea>
-        </div>
-      </div>
-    </div>
-
-    <!-- DECLARAÇÃO -->
-    <div class="card">
-      <div class="card-header"><span class="icon">✅</span><h2>8. Declaração</h2></div>
-      <div class="card-body">
-        <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;">
-          <input type="checkbox" id="f-declara" required style="width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:#2e7d5e;">
-          <span>Declaro que todas as informações fornecidas são verdadeiras e que os documentos anexados são autênticos. Estou ciente de que informações falsas podem implicar na rescisão do contrato de trabalho.</span>
-        </label>
-      </div>
-    </div>
-
-    <button type="submit" class="btn-submit" id="btn-enviar">📤 Enviar Ficha de Admissão</button>
-
-  </form>
-
-  <div id="sucesso">
-    <div style="font-size:52px;margin-bottom:12px;">✅</div>
-    <h2>Ficha enviada com sucesso!</h2>
-    <p style="margin-top:8px;margin-bottom:20px;">Seus dados foram registrados e o arquivo foi baixado.<br>
-    <strong>Agora clique no botão abaixo para enviar o arquivo pelo WhatsApp ao RH:</strong></p>
-    <a id="btn-wpp" href="#" target="_blank"
-      style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:14px 28px;border-radius:10px;font-size:16px;font-weight:800;text-decoration:none;margin-bottom:12px;">
-      <svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.556 4.112 1.523 5.836L.057 23.927l6.235-1.635A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.877 9.877 0 01-5.031-1.378l-.361-.214-3.741.981.999-3.648-.235-.374A9.853 9.853 0 012.106 12C2.106 6.579 6.579 2.106 12 2.106c5.422 0 9.894 4.473 9.894 9.894 0 5.422-4.472 9.894-9.894 9.894z"/></svg>
-      Enviar pelo WhatsApp
-    </a>
-    <br>
-    <p style="font-size:12px;color:#888;margin-top:8px;">Após enviar pelo WhatsApp, <strong>anexe o arquivo JSON</strong> que foi baixado na mesma conversa.</p>
   </div>
+
+  <div class="card">
+    <div class="card-header"><h2>📍 3. Endereço</h2></div>
+    <div class="card-body">
+      <div class="form-row">
+        <div class="fg"><label>CEP <span class="req">*</span></label>
+          <input name="cep" required placeholder="00000-000" oninput="mask(this,'cep');buscaCEP(this)"></div>
+        <div class="fg"><label>Número</label>
+          <input name="numero" placeholder="123"></div>
+      </div>
+      <div class="form-row full">
+        <div class="fg"><label>Logradouro <span class="req">*</span></label>
+          <input name="endereco" id="f-end" required placeholder="Rua, Avenida..."></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Bairro</label>
+          <input name="bairro" id="f-bairro" placeholder="Bairro"></div>
+        <div class="fg"><label>Cidade – UF</label>
+          <input name="cidade" id="f-cidade" placeholder="São Paulo – SP"></div>
+      </div>
+      <div class="form-row full">
+        <div class="fg"><label>Complemento</label>
+          <input name="complemento" placeholder="Apto, bloco, casa..."></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><h2>📄 4. Documentos Trabalhistas</h2></div>
+    <div class="card-body">
+      <div class="form-row">
+        <div class="fg"><label>PIS / NIT</label>
+          <input name="pis" placeholder="000.00000.00-0"></div>
+        <div class="fg"><label>CTPS nº / Série</label>
+          <input name="ctps" placeholder="Ex.: 123456 / 001-SP"></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Título de Eleitor</label>
+          <input name="titulo" placeholder="Número"></div>
+        <div class="fg"><label>Certidão Militar</label>
+          <input name="militar" placeholder="Número (homens)"></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>CNH nº</label>
+          <input name="cnh" placeholder="Número"></div>
+        <div class="fg"><label>Categoria CNH</label>
+          <select name="cnh_cat">
+            <option value="">Não possui</option>
+            <option>A</option><option>B</option><option>AB</option>
+            <option>C</option><option>D</option><option>E</option>
+          </select></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><h2>🏦 5. Dados Bancários</h2></div>
+    <div class="card-body">
+      <div class="form-row tri">
+        <div class="fg"><label>Banco</label>
+          <input name="banco" placeholder="Nubank, Caixa..."></div>
+        <div class="fg"><label>Agência</label>
+          <input name="agencia" placeholder="0000"></div>
+        <div class="fg"><label>Conta</label>
+          <input name="conta" placeholder="00000-0"></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Tipo de Conta</label>
+          <select name="tipo_conta">
+            <option>Corrente</option><option>Poupança</option><option>Pagamento</option>
+          </select></div>
+        <div class="fg"><label>Chave PIX</label>
+          <input name="pix" placeholder="CPF, e-mail ou telefone"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><h2>👕 6. Uniformes</h2></div>
+    <div class="card-body">
+      <div class="form-row">
+        <div class="fg"><label>Camiseta</label>
+          <select name="tam_camisa">
+            <option value="">—</option>
+            <option>PP</option><option>P</option><option>M</option>
+            <option>G</option><option>GG</option><option>XGG</option>
+          </select></div>
+        <div class="fg"><label>Calça</label>
+          <select name="tam_calca">
+            <option value="">—</option>
+            <option>34</option><option>36</option><option>38</option><option>40</option>
+            <option>42</option><option>44</option><option>46</option><option>48</option><option>50</option>
+          </select></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Calçado (nº)</label>
+          <input type="number" name="tam_calcado" min="33" max="48" placeholder="40"></div>
+        <div class="fg"><label>Jaleco</label>
+          <select name="tam_jaleco">
+            <option value="">Não se aplica</option>
+            <option>PP</option><option>P</option><option>M</option>
+            <option>G</option><option>GG</option><option>XGG</option>
+          </select></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><h2>📎 7. Documentos (foto ou PDF)</h2></div>
+    <div class="card-body">
+      <p style="font-size:12.5px;color:#666;margin-bottom:14px;">
+        Tire fotos legíveis ou escaneie. Formatos: JPG, PNG, PDF.
+      </p>
+      <div id="uploads-area"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><h2>✅ 8. Declaração</h2></div>
+    <div class="card-body">
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;">
+        <input type="checkbox" name="declara" required style="width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:#2e7d5e;">
+        <span>Declaro que todas as informações são verdadeiras e os documentos são autênticos.</span>
+      </label>
+    </div>
+  </div>
+
+  <div id="prog-area" style="display:none;">
+    <div class="prog"><div class="prog-bar" id="prog-bar"></div></div>
+    <div id="prog-txt">Enviando...</div>
+  </div>
+
+  <button type="submit" class="btn" id="btn-env">📤 Enviar Ficha de Admissão</button>
+</form>
+
+<div id="tela-sucesso">
+  <div class="big">✅</div>
+  <h2>Ficha enviada com sucesso!</h2>
+  <p>Seus dados chegaram ao RH da Equilibryum.<br>
+  Entraremos em contato em breve.<br><br>
+  <strong>Obrigado! 😊</strong></p>
+</div>
 
 </div>
 
 <script>
-// ════════════════════════════════════════════════════
-// CONFIGURAÇÃO — altere apenas esta seção
-var CONFIG = {
-  empresa:  'Equilibryum – RH',
-  wpp_rh:   '5511963332165',  // ← número WhatsApp do RH (DDI+DDD+número, sem espaços/traços)
-  prazo_hs: 48                 // prazo em horas para envio
-};
-// ════════════════════════════════════════════════════
+// ══════════════════════════════════════════════
+// CONFIGURAÇÃO — cole aqui a URL do Apps Script
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyS99myEmIOhAehF3_J9i-7_ot0POwU3_jzWJZOGhy194egzr3K8WtkjaKnNghrSm0EHw/exec';
+// ══════════════════════════════════════════════
 
-// ── Documentos necessários ──
-var DOCS_NECESSARIOS = [
-  { id: 'doc-rg',      label: 'RG (frente e verso)',         req: true  },
-  { id: 'doc-cpf',     label: 'CPF',                          req: true  },
-  { id: 'doc-comp',    label: 'Comprovante de Residência',    req: true  },
-  { id: 'doc-foto',    label: 'Foto 3x4 recente',             req: true  },
-  { id: 'doc-ctps',    label: 'CTPS (Carteira de Trabalho)',  req: true  },
-  { id: 'doc-pis',     label: 'Cartão PIS / NIT',             req: false },
-  { id: 'doc-titulo',  label: 'Título de Eleitor',            req: false },
-  { id: 'doc-militar', label: 'Certificado de Reservista',    req: false },
-  { id: 'doc-cnh',     label: 'CNH (se possuir)',             req: false },
-  { id: 'doc-banco',   label: 'Comprovante Bancário',         req: false },
-  { id: 'doc-aso',     label: 'ASO / Exame Admissional',      req: false },
+var DOCS = [
+  {id:'rg',      label:'RG (frente e verso)',        req:true},
+  {id:'cpf',     label:'CPF',                         req:true},
+  {id:'compres', label:'Comprovante de Residência',   req:true},
+  {id:'foto',    label:'Foto 3x4',                    req:true},
+  {id:'ctps',    label:'CTPS – Carteira de Trabalho', req:true},
+  {id:'pis',     label:'Cartão PIS/NIT',              req:false},
+  {id:'titulo',  label:'Título de Eleitor',           req:false},
+  {id:'militar', label:'Certificado de Reservista',   req:false},
+  {id:'cnh',     label:'CNH',                         req:false},
+  {id:'banco',   label:'Comprovante Bancário',        req:false},
+  {id:'aso',     label:'ASO – Exame Admissional',     req:false},
 ];
 
-var arquivosAnexos = {};
+var arquivos = {};
 
-function criarUploadArea(doc) {
+// Build upload areas
+var area = document.getElementById('uploads-area');
+DOCS.forEach(function(d) {
   var div = document.createElement('div');
-  div.style.marginBottom = '14px';
+  div.style.marginBottom = '12px';
   div.innerHTML =
-    '<label style="font-size:12px;font-weight:700;color:#444;display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px;">' +
-      doc.label + (doc.req ? ' <span style="color:#c0392b">*</span>' : ' <span style="font-size:10px;color:#888;font-weight:400;text-transform:none;">(opcional)</span>') +
+    '<label style="font-size:11.5px;font-weight:700;color:#444;display:block;margin-bottom:5px;text-transform:uppercase;">' +
+      d.label + (d.req ? ' <span style="color:#c0392b">*</span>' : ' <span style="font-size:10px;color:#888;font-weight:400;text-transform:none;">(opcional)</span>') +
     '</label>' +
-    '<div class="upload-area" id="area-' + doc.id + '">' +
-      '<input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple id="inp-' + doc.id + '" onchange="adicionarArquivos(\'' + doc.id + '\',this)">' +
-      '<div class="icon">📎</div>' +
-      '<div class="label">Clique para anexar</div>' +
-      '<p>JPG, PNG ou PDF · Múltiplos arquivos permitidos</p>' +
+    '<div class="upload-box">' +
+      '<input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addFiles(''+d.id+'',this)">' +
+      '<div class="ico">📎</div>' +
+      '<strong>Clique para anexar</strong>' +
+      '<p>JPG, PNG ou PDF</p>' +
     '</div>' +
-    '<div class="file-list" id="list-' + doc.id + '"></div>';
-  return div;
-}
+    '<div class="file-list" id="fl-'+d.id+'"></div>';
+  area.appendChild(div);
+});
 
-function adicionarArquivos(docId, inp) {
-  if (!arquivosAnexos[docId]) arquivosAnexos[docId] = [];
-  Array.from(inp.files).forEach(function(f) {
-    arquivosAnexos[docId].push(f);
-  });
-  renderFileList(docId);
+function addFiles(id, inp) {
+  if (!arquivos[id]) arquivos[id] = [];
+  Array.from(inp.files).forEach(function(f){ arquivos[id].push(f); });
+  renderFL(id);
   inp.value = '';
 }
 
-function renderFileList(docId) {
-  var list = document.getElementById('list-' + docId);
-  var files = arquivosAnexos[docId] || [];
-  list.innerHTML = files.map(function(f, i) {
-    return '<div class="file-item">' +
-      '<span>📄</span>' +
-      '<span class="fname">' + f.name + '</span>' +
-      '<span style="font-size:11px;color:#888;">' + (f.size/1024).toFixed(0) + ' KB</span>' +
-      '<button type="button" class="rm" onclick="removerArquivo(\'' + docId + '\',' + i + ')">×</button>' +
-    '</div>';
+function removeFile(id, i) {
+  arquivos[id].splice(i,1);
+  renderFL(id);
+}
+
+function renderFL(id) {
+  var el = document.getElementById('fl-'+id);
+  el.innerHTML = (arquivos[id]||[]).map(function(f,i){
+    return '<div class="fi"><span>📄 '+f.name+'</span><span style="color:#888;font-size:11px;">'+(f.size/1024).toFixed(0)+'KB</span>'+
+      '<button type="button" onclick="removeFile(''+id+'','+i+')">×</button></div>';
   }).join('');
-  // Update area border to show if file was added
-  var area = document.getElementById('area-' + docId);
-  if (area) {
-    if (files.length > 0) {
-      area.style.borderColor = '#2e7d5e';
-      area.style.background = '#f0faf5';
-    } else {
-      area.style.borderColor = '';
-      area.style.background = '';
-    }
-  }
 }
 
-function removerArquivo(docId, idx) {
-  arquivosAnexos[docId].splice(idx, 1);
-  renderFileList(docId);
-}
-
-// Build upload areas
-var container = document.getElementById('docs-container');
-DOCS_NECESSARIOS.forEach(function(doc) {
-  container.appendChild(criarUploadArea(doc));
-});
-
-// ── Máscaras ──
-function mascara(el, tipo) {
+function mask(el, tipo) {
   var v = el.value.replace(/\D/g,'');
-  if (tipo === 'cpf') {
-    v = v.slice(0,11);
-    el.value = v.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,'$1.$2.$3-$4')
-                .replace(/(\d{3})(\d{3})(\d{0,3})/,'$1.$2.$3')
-                .replace(/(\d{3})(\d{0,3})/,'$1.$2');
-  } else if (tipo === 'tel') {
-    v = v.slice(0,11);
-    if (v.length > 10) el.value = v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
-    else el.value = v.replace(/(\d{2})(\d{4})(\d{0,4})/,'($1) $2-$3');
-  } else if (tipo === 'cep') {
-    v = v.slice(0,8);
-    el.value = v.replace(/(\d{5})(\d{0,3})/,'$1-$2');
-  }
+  if (tipo==='cpf'){v=v.slice(0,11);el.value=v.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,'$1.$2.$3-$4').replace(/(\d{3})(\d{3})(\d{0,3})/,'$1.$2.$3').replace(/(\d{3})(\d{0,3})/,'$1.$2');}
+  else if(tipo==='tel'){v=v.slice(0,11);el.value=v.length>10?v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3'):v.replace(/(\d{2})(\d{4})(\d{0,4})/,'($1) $2-$3');}
+  else if(tipo==='cep'){v=v.slice(0,8);el.value=v.replace(/(\d{5})(\d{0,3})/,'$1-$2');}
 }
 
-// ── Busca CEP ──
-async function buscarCEP(el) {
-  var cep = el.value.replace(/\D/g,'');
-  if (cep.length < 8) return;
+async function buscaCEP(el) {
+  var c = el.value.replace(/\D/g,'');
+  if (c.length < 8) return;
   try {
-    var r = await fetch('https://viacep.com.br/ws/' + cep + '/json/');
+    var r = await fetch('https://viacep.com.br/ws/'+c+'/json/');
     var d = await r.json();
-    if (d.logradouro) {
-      document.getElementById('f-end').value = d.logradouro + ', ' + d.bairro + ' – ' + d.localidade + '-' + d.uf;
-      document.getElementById('f-cidade').value = d.localidade;
-      document.getElementById('f-uf').value = d.uf;
+    if (!d.erro) {
+      document.getElementById('f-end').value    = d.logradouro||'';
+      document.getElementById('f-bairro').value = d.bairro||'';
+      document.getElementById('f-cidade').value = (d.localidade||'') + (d.uf?' – '+d.uf:'');
     }
-  } catch(e) {}
+  } catch(e){}
 }
 
-// ── Submeter ──
-async function submeter(e) {
+function toBase64(file) {
+  return new Promise(function(res,rej){
+    var r = new FileReader();
+    r.onload  = function(e){ res(e.target.result); };
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
+async function enviar(e) {
   e.preventDefault();
 
-  // Validate required documents manually
-  var docsFaltando = [];
-  DOCS_NECESSARIOS.forEach(function(doc) {
-    if (doc.req && (!arquivosAnexos[doc.id] || !arquivosAnexos[doc.id].length)) {
-      docsFaltando.push(doc.label);
-    }
-  });
-  if (docsFaltando.length) {
-    alert('Por favor, anexe os seguintes documentos obrigatórios:\n\n• ' + docsFaltando.join('\n• '));
-    // Scroll to docs section
-    document.getElementById('docs-container').scrollIntoView({behavior:'smooth'});
+  // Validate required docs
+  var faltando = DOCS.filter(function(d){ return d.req && (!arquivos[d.id]||!arquivos[d.id].length); });
+  if (faltando.length) {
+    alert('Anexe os documentos obrigatórios:
+
+• ' + faltando.map(function(d){return d.label;}).join('
+• '));
+    document.getElementById('uploads-area').scrollIntoView({behavior:'smooth'});
     return;
   }
 
-  var btn = document.getElementById('btn-enviar');
+  var btn = document.getElementById('btn-env');
   btn.disabled = true;
-  btn.textContent = '⏳ Gerando arquivo...';
+  document.getElementById('prog-area').style.display = 'block';
 
-  // Validate required documents
-  var docsObrigatorios = DOCS_NECESSARIOS.filter(function(d){ return d.req; });
-  var docsFaltando = docsObrigatorios.filter(function(d){
-    return !arquivosAnexos[d.id] || arquivosAnexos[d.id].length === 0;
-  });
-  if (docsFaltando.length > 0) {
-    alert('Por favor, anexe os seguintes documentos obrigatórios:\n\n' +
-      docsFaltando.map(function(d){ return '• ' + d.label; }).join('\n'));
-    btn.disabled = false;
-    btn.textContent = '📤 Enviar Ficha de Admissão';
-    // Scroll to first missing doc
-    var firstMissing = document.getElementById('area-' + docsFaltando[0].id);
-    if (firstMissing) firstMissing.scrollIntoView({behavior:'smooth', block:'center'});
-    return;
+  // Collect form data
+  var fd = new FormData(e.target);
+  var dados = {};
+  fd.forEach(function(v,k){ dados[k]=v; });
+
+  // Convert files to base64
+  var progBar = document.getElementById('prog-bar');
+  var progTxt = document.getElementById('prog-txt');
+  var docsB64 = {};
+  var allFiles = [];
+  DOCS.forEach(function(d){ (arquivos[d.id]||[]).forEach(function(f){ allFiles.push({id:d.id,label:d.label,file:f}); }); });
+
+  for (var i=0; i<allFiles.length; i++) {
+    progTxt.textContent = 'Preparando documento ' + (i+1) + ' de ' + allFiles.length + '...';
+    progBar.style.width = Math.round((i/allFiles.length)*70) + '%';
+    var item = allFiles[i];
+    var b64 = await toBase64(item.file);
+    if (!docsB64[item.id]) docsB64[item.id] = [];
+    docsB64[item.id].push({ nome: item.file.name, tipo: item.file.type, dados: b64 });
   }
 
-  // Collect data
-  function gv(id) { var el=document.getElementById(id); return el?el.value.trim():''; }
+  dados.documentos = JSON.stringify(docsB64);
+  progTxt.textContent = 'Enviando ao RH...';
+  progBar.style.width = '85%';
 
-  var dados = {
-    // Campos mapeados para o sistema RH
-    n:         gv('f-nome'),
-    cpf:       gv('f-cpf'),
-    rg:        gv('f-rg'),
-    nas:       gv('f-nas'),
-    sex:       gv('f-sex'),
-    ec:        gv('f-ec'),
-    tel:       gv('f-tel'),
-    email:     gv('f-email'),
-    end:       gv('f-end') + (gv('f-comp') ? ', ' + gv('f-comp') : ''),
-    cep:       gv('f-cep'),
-    pis:       gv('f-pis'),
-    ctps:      gv('f-ctps'),
-    tamCamisa: gv('f-camisa'),
-    tamCalca:  gv('f-calca'),
-    tamCalcado:gv('f-calcado'),
-    tamJaleco: gv('f-jaleco'),
-    st:        'Ativo',
-    tip:       'CLT',
-    // Extras (não direto no sistema mas úteis para RH)
-    _mae:      gv('f-mae'),
-    _pai:      gv('f-pai'),
-    _nac:      gv('f-nac'),
-    _banco:    gv('f-banco') + (gv('f-agencia') ? ' Ag:'+gv('f-agencia') : '') + (gv('f-conta') ? ' Cc:'+gv('f-conta') : ''),
-    _pix:      gv('f-pix'),
-    _titulo:   gv('f-titulo'),
-    _militar:  gv('f-militar'),
-    _cnh:      gv('f-cnh') + (gv('f-cnh-cat') ? ' Cat.'+gv('f-cnh-cat') : ''),
-    _obs:      gv('f-obs'),
-    _enviado:  new Date().toISOString(),
-    docs:      []
-  };
-
-  // Converter documentos para base64
-  var docsPromises = [];
-  DOCS_NECESSARIOS.forEach(function(doc) {
-    var files = arquivosAnexos[doc.id] || [];
-    files.forEach(function(f) {
-      docsPromises.push(new Promise(function(resolve) {
-        var reader = new FileReader();
-        reader.onload = function(ev) {
-          resolve({ cat: doc.id, label: doc.label, name: f.name, dataUrl: ev.target.result });
-        };
-        reader.readAsDataURL(f);
-      }));
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(dados),
+      headers: { 'Content-Type': 'application/json' }
     });
-  });
-
-  dados.docs = await Promise.all(docsPromises);
-
-  // Gerar JSON para download
-  var json = JSON.stringify(dados, null, 2);
-  var blob = new Blob([json], {type:'application/json'});
-  var nomeArq = 'admissao_' + dados.n.replace(/\s+/g,'_').toLowerCase() + '_' + new Date().toISOString().slice(0,10) + '.json';
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = nomeArq;
-  a.click();
-
-  // Enviar resumo por WhatsApp ao RH
-  var resumo = '📋 *FICHA DE ADMISSÃO*%0A%0A'
-    + '*Nome:* ' + encodeURIComponent(dados.n) + '%0A'
-    + '*CPF:* ' + encodeURIComponent(dados.cpf) + '%0A'
-    + '*Tel:* ' + encodeURIComponent(dados.tel) + '%0A'
-    + '*Email:* ' + encodeURIComponent(dados.email) + '%0A'
-    + '*Nascimento:* ' + encodeURIComponent(dados.nas) + '%0A'
-    + '*Endereço:* ' + encodeURIComponent(dados.end) + '%0A'
-    + '*PIS:* ' + encodeURIComponent(dados.pis||'—') + '%0A'
-    + '*CTPS:* ' + encodeURIComponent(dados.ctps||'—') + '%0A'
-    + '*Banco:* ' + encodeURIComponent(dados._banco||'—') + '%0A'
-    + '*PIX:* ' + encodeURIComponent(dados._pix||'—') + '%0A'
-    + '%0A_Arquivo JSON baixado automaticamente._';
-
-  // Mostrar modal de envio
-  document.getElementById('form-admissao').style.display = 'none';
-  document.getElementById('sucesso').style.display = 'block';
-  // Número do WhatsApp do RH (configurar aqui)
-  document.getElementById('btn-wpp').href = 'https://wa.me/' + CONFIG.wpp_rh + '?text=' + resumo;
-  window.scrollTo(0,0);
+    progBar.style.width = '100%';
+    progTxt.textContent = 'Enviado!';
+    setTimeout(function(){
+      document.getElementById('form').style.display = 'none';
+      document.getElementById('tela-sucesso').style.display = 'block';
+      window.scrollTo(0,0);
+    }, 800);
+  } catch(err) {
+    btn.disabled = false;
+    document.getElementById('prog-area').style.display = 'none';
+    alert('Erro ao enviar. Verifique sua conexão e tente novamente.');
+  }
 }
 </script>
 </body>
