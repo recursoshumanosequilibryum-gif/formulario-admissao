@@ -268,23 +268,25 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyS99myEmIOhAehF3
 // ══════════════════════════════════════════════
 
 var DOCS = [
-  {id:'rg',      label:'RG (frente e verso)',        req:true},
-  {id:'cpf',     label:'CPF',                         req:true},
-  {id:'compres', label:'Comprovante de Residência',   req:true},
-  {id:'foto',    label:'Foto 3x4',                    req:true},
-  {id:'ctps',    label:'CTPS – Carteira de Trabalho', req:true},
-  {id:'pis',     label:'Cartão PIS/NIT',              req:false},
-  {id:'titulo',  label:'Título de Eleitor',           req:false},
-  {id:'militar', label:'Certificado de Reservista',   req:false},
-  {id:'cnh',     label:'CNH',                         req:false},
-  {id:'banco',   label:'Comprovante Bancário',        req:false},
-  {id:'aso',     label:'ASO – Exame Admissional',     req:false},
+  {id:'rg',      label:'RG (frente e verso)',               req:true},
+  {id:'cpf',     label:'CPF',                               req:true},
+  {id:'titulo',  label:'Título de Eleitor',                 req:true},
+  {id:'compres', label:'Comprovante de Residência',         req:true},
+  {id:'foto',    label:'Foto para Crachá (fundo branco)',   req:true},
+  {id:'ctps',    label:'CTPS – Carteira de Trabalho',       req:false},
+  {id:'pis',     label:'Cartão PIS/NIT',                    req:false},
+  {id:'militar', label:'Certificado de Reservista',         req:false},
+  {id:'cnh',     label:'CNH (se possuir)',                  req:false},
+  {id:'banco',   label:'Comprovante Bancário',              req:false},
+  {id:'aso',     label:'ASO – Exame Admissional',           req:false},
 ];
 
 var arquivos = {};
 
 // Build upload areas
+document.addEventListener('DOMContentLoaded', function() {
 var area = document.getElementById('uploads-area');
+if (!area) { console.error('uploads-area not found'); return; }
 DOCS.forEach(function(d) {
   var div = document.createElement('div');
   div.style.marginBottom = '12px';
@@ -301,6 +303,8 @@ DOCS.forEach(function(d) {
     '<div class="file-list" id="fl-'+d.id+'"></div>';
   area.appendChild(div);
 });
+
+}); // end DOMContentLoaded
 
 function addFiles(id, inp) {
   if (!arquivos[id]) arquivos[id] = [];
