@@ -7,251 +7,370 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#222;}
-.topo{background:linear-gradient(135deg,#1f5c44,#2e7d5e);color:#fff;padding:28px 16px;text-align:center;}
-.topo h1{font-size:20px;font-weight:800;margin-bottom:6px;}
+.topo{background:linear-gradient(135deg,#1f5c44,#2e7d5e);color:#fff;padding:24px 16px;text-align:center;}
+.topo h1{font-size:20px;font-weight:800;margin-bottom:4px;}
 .topo p{font-size:13px;opacity:.85;}
-.container{max-width:700px;margin:24px auto;padding:0 14px 60px;}
-.card{background:#fff;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.08);margin-bottom:18px;overflow:hidden;}
-.card-header{background:#e8f5ee;padding:13px 20px;border-bottom:2px solid #c8e6d4;display:flex;align-items:center;gap:8px;}
-.card-header h2{font-size:13.5px;font-weight:700;color:#1f5c44;}
-.card-body{padding:18px 20px;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
-.form-row.full{grid-template-columns:1fr;}
-.form-row.tri{grid-template-columns:1fr 1fr 1fr;}
-@media(max-width:560px){.form-row,.form-row.tri{grid-template-columns:1fr;}}
+.container{max-width:700px;margin:20px auto;padding:0 14px 60px;}
+.card{background:#fff;border-radius:12px;box-shadow:0 3px 14px rgba(0,0,0,.08);margin-bottom:16px;overflow:hidden;}
+.ch{background:#e8f5ee;padding:12px 18px;border-bottom:2px solid #c8e6d4;}
+.ch h2{font-size:13.5px;font-weight:700;color:#1f5c44;}
+.cb{padding:16px 18px;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.row.full{grid-template-columns:1fr;}
+.row.tri{grid-template-columns:1fr 1fr 1fr;}
+@media(max-width:540px){.row,.row.tri{grid-template-columns:1fr;}}
 .fg{display:flex;flex-direction:column;gap:4px;}
-label{font-size:11.5px;font-weight:700;color:#444;text-transform:uppercase;letter-spacing:.3px;}
-label .req{color:#c0392b;}
-input,select,textarea{width:100%;padding:9px 11px;border:1.5px solid #d0dce6;border-radius:8px;font-size:13.5px;font-family:inherit;background:#fafcfe;transition:border .2s;}
-input:focus,select:focus,textarea:focus{outline:none;border-color:#2e7d5e;background:#fff;}
-textarea{resize:vertical;min-height:65px;}
-.upload-box{border:2px dashed #aac8b8;border-radius:10px;padding:16px;text-align:center;background:#f7fbf9;position:relative;transition:.2s;cursor:pointer;}
-.upload-box:hover{border-color:#2e7d5e;background:#edf7f2;}
-.upload-box input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.upload-box .ico{font-size:24px;margin-bottom:4px;}
-.upload-box p{font-size:12px;color:#666;}
-.upload-box strong{font-size:12.5px;color:#1f5c44;display:block;margin-bottom:3px;}
-.file-list{margin-top:7px;display:flex;flex-direction:column;gap:4px;}
-.fi{display:flex;align-items:center;gap:7px;background:#e8f5ee;border-radius:6px;padding:5px 9px;font-size:12px;}
-.fi span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#1f5c44;font-weight:600;}
-.fi button{background:none;border:none;cursor:pointer;color:#c0392b;font-size:15px;}
-.aviso{background:#e3f2fd;border:1px solid #90caf9;border-radius:9px;padding:11px 14px;font-size:12.5px;color:#1565c0;margin-bottom:18px;}
-.btn{width:100%;padding:15px;background:linear-gradient(135deg,#1f5c44,#2e7d5e);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer;margin-top:6px;transition:.2s;}
-.btn:hover{opacity:.9;transform:translateY(-1px);}
-.btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
-#tela-sucesso{display:none;text-align:center;padding:48px 20px;background:#fff;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.08);}
-#tela-sucesso .big{font-size:56px;margin-bottom:14px;}
-#tela-sucesso h2{color:#1f5c44;font-size:20px;margin-bottom:8px;}
-#tela-sucesso p{color:#555;font-size:14px;line-height:1.7;}
-.prog{width:100%;background:#e0e0e0;border-radius:8px;height:8px;margin:14px 0 6px;}
-.prog-bar{height:8px;background:linear-gradient(90deg,#1f5c44,#2e7d5e);border-radius:8px;width:0;transition:width .4s;}
-#prog-txt{font-size:12px;color:#555;text-align:center;}
+label.lbl{font-size:11px;font-weight:700;color:#444;text-transform:uppercase;letter-spacing:.3px;}
+.req{color:#c0392b;}
+input[type=text],input[type=date],input[type=email],input[type=tel],input[type=number],select,textarea{
+  width:100%;padding:8px 11px;border:1.5px solid #cdd8e3;border-radius:7px;
+  font-size:13px;font-family:inherit;background:#fafcfe;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#2e7d5e;}
+/* Upload */
+.upbox{border:2px dashed #aac8b8;border-radius:9px;background:#f7fbf9;margin-bottom:10px;}
+.uplabel{display:block;padding:14px;text-align:center;cursor:pointer;}
+.uplabel:hover{background:#edf7f2;border-radius:7px;}
+.uplabel .uico{font-size:26px;display:block;margin-bottom:4px;}
+.uplabel .utitle{font-size:12.5px;font-weight:700;color:#1f5c44;display:block;margin-bottom:2px;}
+.uplabel .usub{font-size:11.5px;color:#777;}
+.uplabel input[type=file]{display:none;}
+.flist{padding:0 10px 8px;}
+.fitem{display:flex;align-items:center;gap:6px;background:#e8f5ee;border-radius:6px;padding:5px 8px;margin-bottom:4px;font-size:12px;}
+.fitem span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#1f5c44;font-weight:600;}
+.fitem .sz{color:#888;font-size:11px;flex-shrink:0;}
+.fitem .rm{background:none;border:none;cursor:pointer;color:#c0392b;font-size:16px;padding:0;line-height:1;}
+.doc-req-tag{display:inline-block;background:#c0392b;color:#fff;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;}
+.doc-opt-tag{display:inline-block;background:#888;color:#fff;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;}
+.doc-nome{font-size:12.5px;font-weight:700;color:#333;display:block;margin-bottom:6px;}
+.aviso{background:#e3f2fd;border:1px solid #90caf9;border-radius:8px;padding:11px 14px;font-size:12.5px;color:#1565c0;margin-bottom:16px;}
+.btn{width:100%;padding:14px;background:linear-gradient(135deg,#1f5c44,#2e7d5e);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer;margin-top:6px;}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+#prog{display:none;margin:14px 0;}
+.pbar{background:#e0e0e0;border-radius:8px;height:8px;}
+.pbar-fill{height:8px;background:#2e7d5e;border-radius:8px;width:0;transition:width .4s;}
+#ptxt{font-size:12px;color:#555;text-align:center;margin-top:5px;}
+#sucesso{display:none;text-align:center;padding:44px 20px;background:#fff;border-radius:12px;box-shadow:0 3px 14px rgba(0,0,0,.08);}
+#sucesso .big{font-size:52px;margin-bottom:12px;}
+#sucesso h2{color:#1f5c44;font-size:19px;margin-bottom:8px;}
+#sucesso p{color:#555;font-size:13.5px;line-height:1.7;}
 </style>
 </head>
 <body>
 
 <div class="topo">
-  <h1>📋 Ficha de Admissão</h1>
-  <p>Preencha todos os campos e envie seus documentos. Os dados chegam diretamente ao RH.</p>
+  <h1>📋 Ficha de Admissão – Equilibryum</h1>
+  <p>Preencha todos os campos e envie seus documentos. Os dados chegam direto ao RH.</p>
 </div>
 
 <div class="container">
 
 <div class="aviso">
-  📌 Todos os campos marcados com <strong style="color:#c0392b">*</strong> são obrigatórios.
-  Após enviar, seus dados chegam automaticamente ao RH — nenhum arquivo precisa ser enviado manualmente.
+  📌 Campos com <strong style="color:#c0392b">*</strong> são obrigatórios.
+  Após enviar, seus dados chegam automaticamente ao RH — sem precisar encaminhar nada manualmente.
 </div>
 
-<form id="form" onsubmit="enviar(event)">
+<form id="form">
 
+  <!-- DADOS PESSOAIS -->
   <div class="card">
-    <div class="card-header"><h2>👤 1. Dados Pessoais</h2></div>
-    <div class="card-body">
-      <div class="form-row full">
-        <div class="fg"><label>Nome Completo <span class="req">*</span></label>
-          <input name="nome" required placeholder="Seu nome completo"></div>
+    <div class="ch"><h2>👤 1. Dados Pessoais</h2></div>
+    <div class="cb">
+      <div class="row full">
+        <div class="fg"><label class="lbl">Nome Completo <span class="req">*</span></label>
+          <input type="text" id="nome" required placeholder="Seu nome completo"></div>
       </div>
-      <div class="form-row">
-        <div class="fg"><label>CPF <span class="req">*</span></label>
-          <input name="cpf" required placeholder="000.000.000-00" oninput="mask(this,'cpf')"></div>
-        <div class="fg"><label>RG</label>
-          <input name="rg" placeholder="00.000.000-0"></div>
+      <div class="row">
+        <div class="fg"><label class="lbl">CPF <span class="req">*</span></label>
+          <input type="text" id="cpf" required placeholder="000.000.000-00" maxlength="14" oninput="mkCPF(this)"></div>
+        <div class="fg"><label class="lbl">RG</label>
+          <input type="text" id="rg" placeholder="00.000.000-0"></div>
       </div>
-      <div class="form-row">
-        <div class="fg"><label>Data de Nascimento <span class="req">*</span></label>
-          <input type="date" name="nascimento" required></div>
-        <div class="fg"><label>Sexo</label>
-          <select name="sexo">
+      <div class="row">
+        <div class="fg"><label class="lbl">Nascimento <span class="req">*</span></label>
+          <input type="date" id="nascimento" required></div>
+        <div class="fg"><label class="lbl">Sexo</label>
+          <select id="sexo">
             <option value="">Selecione</option>
             <option>Masculino</option><option>Feminino</option><option>Outro</option>
           </select></div>
       </div>
-      <div class="form-row">
-        <div class="fg"><label>Estado Civil</label>
-          <select name="estado_civil">
+      <div class="row">
+        <div class="fg"><label class="lbl">Estado Civil</label>
+          <select id="estado_civil">
             <option value="">Selecione</option>
             <option>Solteiro(a)</option><option>Casado(a)</option>
-            <option>Divorciado(a)</option><option>Viúvo(a)</option><option>União Estável</option>
+            <option>Divorciado(a)</option><option>Viuvo(a)</option><option>Uniao Estavel</option>
           </select></div>
-        <div class="fg"><label>Naturalidade</label>
-          <input name="naturalidade" placeholder="Cidade – UF"></div>
+        <div class="fg"><label class="lbl">Naturalidade</label>
+          <input type="text" id="naturalidade" placeholder="Cidade – UF"></div>
       </div>
-      <div class="form-row">
-        <div class="fg"><label>Nome da Mãe</label>
-          <input name="nome_mae" placeholder="Nome completo"></div>
-        <div class="fg"><label>Nome do Pai</label>
-          <input name="nome_pai" placeholder="Nome completo"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header"><h2>📞 2. Contato</h2></div>
-    <div class="card-body">
-      <div class="form-row">
-        <div class="fg"><label>WhatsApp <span class="req">*</span></label>
-          <input name="telefone" required placeholder="(11) 99999-9999" oninput="mask(this,'tel')"></div>
-        <div class="fg"><label>E-mail <span class="req">*</span></label>
-          <input type="email" name="email" required placeholder="seu@email.com"></div>
+      <div class="row">
+        <div class="fg"><label class="lbl">Nome da Mae</label>
+          <input type="text" id="nome_mae" placeholder="Nome completo"></div>
+        <div class="fg"><label class="lbl">Nome do Pai</label>
+          <input type="text" id="nome_pai" placeholder="Nome completo"></div>
       </div>
     </div>
   </div>
 
+  <!-- CONTATO -->
   <div class="card">
-    <div class="card-header"><h2>📍 3. Endereço</h2></div>
-    <div class="card-body">
-      <div class="form-row">
-        <div class="fg"><label>CEP <span class="req">*</span></label>
-          <input name="cep" required placeholder="00000-000" oninput="mask(this,'cep');buscaCEP(this)"></div>
-        <div class="fg"><label>Número</label>
-          <input name="numero" placeholder="123"></div>
-      </div>
-      <div class="form-row full">
-        <div class="fg"><label>Logradouro <span class="req">*</span></label>
-          <input name="endereco" id="f-end" required placeholder="Rua, Avenida..."></div>
-      </div>
-      <div class="form-row">
-        <div class="fg"><label>Bairro</label>
-          <input name="bairro" id="f-bairro" placeholder="Bairro"></div>
-        <div class="fg"><label>Cidade – UF</label>
-          <input name="cidade" id="f-cidade" placeholder="São Paulo – SP"></div>
-      </div>
-      <div class="form-row full">
-        <div class="fg"><label>Complemento</label>
-          <input name="complemento" placeholder="Apto, bloco, casa..."></div>
+    <div class="ch"><h2>📞 2. Contato</h2></div>
+    <div class="cb">
+      <div class="row">
+        <div class="fg"><label class="lbl">WhatsApp <span class="req">*</span></label>
+          <input type="tel" id="telefone" required placeholder="(11) 99999-9999" oninput="mkTel(this)"></div>
+        <div class="fg"><label class="lbl">E-mail <span class="req">*</span></label>
+          <input type="email" id="email" required placeholder="seu@email.com"></div>
       </div>
     </div>
   </div>
 
+  <!-- ENDERECO -->
   <div class="card">
-    <div class="card-header"><h2>📄 4. Documentos Trabalhistas</h2></div>
-    <div class="card-body">
-      <div class="form-row">
-        <div class="fg"><label>PIS / NIT</label>
-          <input name="pis" placeholder="000.00000.00-0"></div>
-        <div class="fg"><label>CTPS nº / Série</label>
-          <input name="ctps" placeholder="Ex.: 123456 / 001-SP"></div>
+    <div class="ch"><h2>📍 3. Endereço</h2></div>
+    <div class="cb">
+      <div class="row">
+        <div class="fg"><label class="lbl">CEP <span class="req">*</span></label>
+          <input type="text" id="cep" required placeholder="00000-000" maxlength="9" oninput="mkCEP(this)"></div>
+        <div class="fg"><label class="lbl">Numero</label>
+          <input type="text" id="numero" placeholder="123"></div>
       </div>
-      <div class="form-row">
-        <div class="fg"><label>Título de Eleitor</label>
-          <input name="titulo" placeholder="Número"></div>
-        <div class="fg"><label>Certidão Militar</label>
-          <input name="militar" placeholder="Número (homens)"></div>
+      <div class="row full">
+        <div class="fg"><label class="lbl">Logradouro <span class="req">*</span></label>
+          <input type="text" id="endereco" required placeholder="Rua, Avenida..."></div>
       </div>
-      <div class="form-row">
-        <div class="fg"><label>CNH nº</label>
-          <input name="cnh" placeholder="Número"></div>
-        <div class="fg"><label>Categoria CNH</label>
-          <select name="cnh_cat">
-            <option value="">Não possui</option>
-            <option>A</option><option>B</option><option>AB</option>
-            <option>C</option><option>D</option><option>E</option>
+      <div class="row">
+        <div class="fg"><label class="lbl">Bairro</label>
+          <input type="text" id="bairro" placeholder="Bairro"></div>
+        <div class="fg"><label class="lbl">Cidade – UF</label>
+          <input type="text" id="cidade" placeholder="São Paulo – SP"></div>
+      </div>
+      <div class="row full">
+        <div class="fg"><label class="lbl">Complemento</label>
+          <input type="text" id="complemento" placeholder="Apto, bloco, casa..."></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOCS TRABALHISTAS -->
+  <div class="card">
+    <div class="ch"><h2>📄 4. Documentos Trabalhistas</h2></div>
+    <div class="cb">
+      <div class="row">
+        <div class="fg"><label class="lbl">PIS / NIT</label>
+          <input type="text" id="pis" placeholder="000.00000.00-0"></div>
+        <div class="fg"><label class="lbl">CTPS n / Serie</label>
+          <input type="text" id="ctps" placeholder="123456 / 001-SP"></div>
+      </div>
+      <div class="row">
+        <div class="fg"><label class="lbl">Titulo de Eleitor</label>
+          <input type="text" id="titulo" placeholder="Numero"></div>
+        <div class="fg"><label class="lbl">Cert. Militar</label>
+          <input type="text" id="militar" placeholder="Numero (homens)"></div>
+      </div>
+      <div class="row">
+        <div class="fg"><label class="lbl">CNH</label>
+          <input type="text" id="cnh" placeholder="Numero"></div>
+        <div class="fg"><label class="lbl">Categoria CNH</label>
+          <select id="cnh_cat">
+            <option value="">Nao possui</option>
+            <option>A</option><option>B</option><option>AB</option><option>C</option><option>D</option><option>E</option>
           </select></div>
       </div>
     </div>
   </div>
 
+  <!-- BANCARIO -->
   <div class="card">
-    <div class="card-header"><h2>🏦 5. Dados Bancários</h2></div>
-    <div class="card-body">
-      <div class="form-row tri">
-        <div class="fg"><label>Banco</label>
-          <input name="banco" placeholder="Nubank, Caixa..."></div>
-        <div class="fg"><label>Agência</label>
-          <input name="agencia" placeholder="0000"></div>
-        <div class="fg"><label>Conta</label>
-          <input name="conta" placeholder="00000-0"></div>
+    <div class="ch"><h2>🏦 5. Dados Bancários</h2></div>
+    <div class="cb">
+      <div class="row tri">
+        <div class="fg"><label class="lbl">Banco</label>
+          <input type="text" id="banco" placeholder="Nubank, Caixa..."></div>
+        <div class="fg"><label class="lbl">Agencia</label>
+          <input type="text" id="agencia" placeholder="0000"></div>
+        <div class="fg"><label class="lbl">Conta</label>
+          <input type="text" id="conta" placeholder="00000-0"></div>
       </div>
-      <div class="form-row">
-        <div class="fg"><label>Tipo de Conta</label>
-          <select name="tipo_conta">
-            <option>Corrente</option><option>Poupança</option><option>Pagamento</option>
+      <div class="row">
+        <div class="fg"><label class="lbl">Tipo de Conta</label>
+          <select id="tipo_conta">
+            <option>Corrente</option><option>Poupanca</option><option>Pagamento</option>
           </select></div>
-        <div class="fg"><label>Chave PIX</label>
-          <input name="pix" placeholder="CPF, e-mail ou telefone"></div>
+        <div class="fg"><label class="lbl">Chave PIX</label>
+          <input type="text" id="pix" placeholder="CPF, e-mail ou telefone"></div>
       </div>
     </div>
   </div>
 
+  <!-- UNIFORMES -->
   <div class="card">
-    <div class="card-header"><h2>👕 6. Uniformes</h2></div>
-    <div class="card-body">
-      <div class="form-row">
-        <div class="fg"><label>Camiseta</label>
-          <select name="tam_camisa">
-            <option value="">—</option>
-            <option>PP</option><option>P</option><option>M</option>
-            <option>G</option><option>GG</option><option>XGG</option>
+    <div class="ch"><h2>👕 6. Uniformes</h2></div>
+    <div class="cb">
+      <div class="row">
+        <div class="fg"><label class="lbl">Camiseta</label>
+          <select id="tam_camisa">
+            <option value="">--</option>
+            <option>PP</option><option>P</option><option>M</option><option>G</option><option>GG</option><option>XGG</option>
           </select></div>
-        <div class="fg"><label>Calça</label>
-          <select name="tam_calca">
-            <option value="">—</option>
+        <div class="fg"><label class="lbl">Calca</label>
+          <select id="tam_calca">
+            <option value="">--</option>
             <option>34</option><option>36</option><option>38</option><option>40</option>
             <option>42</option><option>44</option><option>46</option><option>48</option><option>50</option>
           </select></div>
       </div>
-      <div class="form-row">
-        <div class="fg"><label>Calçado (nº)</label>
-          <input type="number" name="tam_calcado" min="33" max="48" placeholder="40"></div>
-        <div class="fg"><label>Jaleco</label>
-          <select name="tam_jaleco">
-            <option value="">Não se aplica</option>
-            <option>PP</option><option>P</option><option>M</option>
-            <option>G</option><option>GG</option><option>XGG</option>
+      <div class="row">
+        <div class="fg"><label class="lbl">Calcado (n)</label>
+          <input type="number" id="tam_calcado" min="33" max="48" placeholder="40"></div>
+        <div class="fg"><label class="lbl">Jaleco</label>
+          <select id="tam_jaleco">
+            <option value="">Nao se aplica</option>
+            <option>PP</option><option>P</option><option>M</option><option>G</option><option>GG</option><option>XGG</option>
           </select></div>
       </div>
     </div>
   </div>
 
+  <!-- ANEXOS -->
   <div class="card">
-    <div class="card-header"><h2>📎 7. Documentos (foto ou PDF)</h2></div>
-    <div class="card-body">
-      <p style="font-size:12.5px;color:#666;margin-bottom:14px;">
-        Tire fotos legíveis ou escaneie. Formatos: JPG, PNG, PDF.
-      </p>
-      <div id="uploads-area"></div>
+    <div class="ch"><h2>📎 7. Documentos – Anexar Fotos ou PDFs</h2></div>
+    <div class="cb">
+      <p style="font-size:12.5px;color:#666;margin-bottom:16px;">Tire fotos legíveis ou escaneie. Formatos aceitos: JPG, PNG, PDF.</p>
+
+      <!-- RG -->
+      <span class="doc-nome">RG (frente e verso) <span class="doc-req-tag">OBRIGATÓRIO</span></span>
+      <div class="upbox">
+        <label class="uplabel">
+          <span class="uico">📷</span>
+          <span class="utitle">Clique para anexar o RG</span>
+          <span class="usub">JPG, PNG ou PDF</span>
+          <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('rg',this)">
+        </label>
+        <div class="flist" id="fl-rg"></div>
+      </div>
+
+      <!-- CPF -->
+      <span class="doc-nome">CPF <span class="doc-req-tag">OBRIGATÓRIO</span></span>
+      <div class="upbox">
+        <label class="uplabel">
+          <span class="uico">📷</span>
+          <span class="utitle">Clique para anexar o CPF</span>
+          <span class="usub">JPG, PNG ou PDF</span>
+          <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('cpf_doc',this)">
+        </label>
+        <div class="flist" id="fl-cpf_doc"></div>
+      </div>
+
+      <!-- TITULO -->
+      <span class="doc-nome">Título de Eleitor <span class="doc-req-tag">OBRIGATÓRIO</span></span>
+      <div class="upbox">
+        <label class="uplabel">
+          <span class="uico">📷</span>
+          <span class="utitle">Clique para anexar o Título de Eleitor</span>
+          <span class="usub">JPG, PNG ou PDF</span>
+          <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('titulo_doc',this)">
+        </label>
+        <div class="flist" id="fl-titulo_doc"></div>
+      </div>
+
+      <!-- COMPROVANTE RESIDENCIA -->
+      <span class="doc-nome">Comprovante de Residência <span class="doc-req-tag">OBRIGATÓRIO</span></span>
+      <div class="upbox">
+        <label class="uplabel">
+          <span class="uico">📷</span>
+          <span class="utitle">Clique para anexar o Comprovante</span>
+          <span class="usub">Conta de água, luz, telefone ou banco – JPG, PNG ou PDF</span>
+          <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('compres',this)">
+        </label>
+        <div class="flist" id="fl-compres"></div>
+      </div>
+
+      <!-- FOTO CRACHA -->
+      <span class="doc-nome">Foto para Crachá (fundo branco) <span class="doc-req-tag">OBRIGATÓRIO</span></span>
+      <div class="upbox">
+        <label class="uplabel">
+          <span class="uico">🤳</span>
+          <span class="utitle">Clique para anexar a Foto</span>
+          <span class="usub">Fundo branco, rosto visível – JPG ou PNG</span>
+          <input type="file" accept=".jpg,.jpeg,.png" onchange="addDoc('foto',this)">
+        </label>
+        <div class="flist" id="fl-foto"></div>
+      </div>
+
+      <!-- CTPS -->
+      <span class="doc-nome">CTPS – Carteira de Trabalho <span class="doc-opt-tag">OPCIONAL</span></span>
+      <div class="upbox">
+        <label class="uplabel">
+          <span class="uico">📷</span>
+          <span class="utitle">Clique para anexar a CTPS</span>
+          <span class="usub">Página de identificação – JPG, PNG ou PDF</span>
+          <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('ctps_doc',this)">
+        </label>
+        <div class="flist" id="fl-ctps_doc"></div>
+      </div>
+
+      <!-- PIS -->
+      <span class="doc-nome">Cartão PIS / NIT <span class="doc-opt-tag">OPCIONAL</span></span>
+      <div class="upbox">
+        <label class="uplabel">
+          <span class="uico">📷</span>
+          <span class="utitle">Clique para anexar o PIS/NIT</span>
+          <span class="usub">JPG, PNG ou PDF</span>
+          <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('pis_doc',this)">
+        </label>
+        <div class="flist" id="fl-pis_doc"></div>
+      </div>
+
+      <!-- BANCO -->
+      <span class="doc-nome">Comprovante Bancário <span class="doc-opt-tag">OPCIONAL</span></span>
+      <div class="upbox">
+        <label class="uplabel">
+          <span class="uico">📷</span>
+          <span class="utitle">Clique para anexar Comprovante Bancário</span>
+          <span class="usub">Cartão, extrato ou print do app – JPG, PNG ou PDF</span>
+          <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('banco_doc',this)">
+        </label>
+        <div class="flist" id="fl-banco_doc"></div>
+      </div>
+
+      <!-- ASO -->
+      <span class="doc-nome">ASO – Exame Admissional <span class="doc-opt-tag">OPCIONAL</span></span>
+      <div class="upbox">
+        <label class="uplabel">
+          <span class="uico">📷</span>
+          <span class="utitle">Clique para anexar o ASO</span>
+          <span class="usub">JPG, PNG ou PDF</span>
+          <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('aso',this)">
+        </label>
+        <div class="flist" id="fl-aso"></div>
+      </div>
+
     </div>
   </div>
 
+  <!-- DECLARACAO -->
   <div class="card">
-    <div class="card-header"><h2>✅ 8. Declaração</h2></div>
-    <div class="card-body">
-      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;">
-        <input type="checkbox" name="declara" required style="width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:#2e7d5e;">
-        <span>Declaro que todas as informações são verdadeiras e os documentos são autênticos.</span>
+    <div class="ch"><h2>✅ 8. Declaração</h2></div>
+    <div class="cb">
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;">
+        <input type="checkbox" id="declara" required style="width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:#2e7d5e;">
+        <span>Declaro que todas as informações são verdadeiras e os documentos são autênticos. Estou ciente de que informações falsas podem implicar rescisão do contrato.</span>
       </label>
     </div>
   </div>
 
-  <div id="prog-area" style="display:none;">
-    <div class="prog"><div class="prog-bar" id="prog-bar"></div></div>
-    <div id="prog-txt">Enviando...</div>
+  <div id="prog">
+    <div class="pbar"><div class="pbar-fill" id="pbar"></div></div>
+    <div id="ptxt">Enviando...</div>
   </div>
 
-  <button type="submit" class="btn" id="btn-env">📤 Enviar Ficha de Admissão</button>
+  <button type="button" class="btn" id="btn-env" onclick="enviar()">📤 Enviar Ficha de Admissão</button>
+
 </form>
 
-<div id="tela-sucesso">
+<div id="sucesso">
   <div class="big">✅</div>
   <h2>Ficha enviada com sucesso!</h2>
   <p>Seus dados chegaram ao RH da Equilibryum.<br>
@@ -262,160 +381,171 @@ textarea{resize:vertical;min-height:65px;}
 </div>
 
 <script>
-// ══════════════════════════════════════════════
-// CONFIGURAÇÃO — cole aqui a URL do Apps Script
 var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyS99myEmIOhAehF3_J9i-7_ot0POwU3_jzWJZOGhy194egzr3K8WtkjaKnNghrSm0EHw/exec';
-// ══════════════════════════════════════════════
 
-var DOCS = [
-  {id:'rg',      label:'RG (frente e verso)',               req:true},
-  {id:'cpf',     label:'CPF',                               req:true},
-  {id:'titulo',  label:'Título de Eleitor',                 req:true},
-  {id:'compres', label:'Comprovante de Residência',         req:true},
-  {id:'foto',    label:'Foto para Crachá (fundo branco)',   req:true},
-  {id:'ctps',    label:'CTPS – Carteira de Trabalho',       req:false},
-  {id:'pis',     label:'Cartão PIS/NIT',                    req:false},
-  {id:'militar', label:'Certificado de Reservista',         req:false},
-  {id:'cnh',     label:'CNH (se possuir)',                  req:false},
-  {id:'banco',   label:'Comprovante Bancário',              req:false},
-  {id:'aso',     label:'ASO – Exame Admissional',           req:false},
-];
-
+var DOCS_OBR = ['rg','cpf_doc','titulo_doc','compres','foto'];
+var DOCS_LABELS = {
+  rg:'RG', cpf_doc:'CPF', titulo_doc:'Titulo de Eleitor',
+  compres:'Comprovante de Residencia', foto:'Foto para Cracha',
+  ctps_doc:'CTPS', pis_doc:'PIS/NIT', banco_doc:'Comprovante Bancario', aso:'ASO'
+};
 var arquivos = {};
 
-// Build upload areas
-document.addEventListener('DOMContentLoaded', function() {
-var area = document.getElementById('uploads-area');
-if (!area) { console.error('uploads-area not found'); return; }
-DOCS.forEach(function(d) {
-  var div = document.createElement('div');
-  div.style.marginBottom = '12px';
-  div.innerHTML =
-    '<label style="font-size:11.5px;font-weight:700;color:#444;display:block;margin-bottom:5px;text-transform:uppercase;">' +
-      d.label + (d.req ? ' <span style="color:#c0392b">*</span>' : ' <span style="font-size:10px;color:#888;font-weight:400;text-transform:none;">(opcional)</span>') +
-    '</label>' +
-    '<div class="upload-box">' +
-      '<input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addFiles(''+d.id+'',this)">' +
-      '<div class="ico">📎</div>' +
-      '<strong>Clique para anexar</strong>' +
-      '<p>JPG, PNG ou PDF</p>' +
-    '</div>' +
-    '<div class="file-list" id="fl-'+d.id+'"></div>';
-  area.appendChild(div);
-});
-
-}); // end DOMContentLoaded
-
-function addFiles(id, inp) {
+function addDoc(id, inp) {
   if (!arquivos[id]) arquivos[id] = [];
   Array.from(inp.files).forEach(function(f){ arquivos[id].push(f); });
-  renderFL(id);
+  renderList(id);
   inp.value = '';
 }
 
-function removeFile(id, i) {
+function removeDoc(id, i) {
   arquivos[id].splice(i,1);
-  renderFL(id);
+  renderList(id);
 }
 
-function renderFL(id) {
+function renderList(id) {
   var el = document.getElementById('fl-'+id);
+  if (!el) return;
   el.innerHTML = (arquivos[id]||[]).map(function(f,i){
-    return '<div class="fi"><span>📄 '+f.name+'</span><span style="color:#888;font-size:11px;">'+(f.size/1024).toFixed(0)+'KB</span>'+
-      '<button type="button" onclick="removeFile(''+id+'','+i+')">×</button></div>';
+    return '<div class="fitem">'+
+      '<span>📄 '+f.name+'</span>'+
+      '<span class="sz">'+(f.size/1024).toFixed(0)+'KB</span>'+
+      '<button class="rm" onclick="removeDoc(\''+id+'\','+i+')" type="button">×</button>'+
+    '</div>';
   }).join('');
 }
 
-function mask(el, tipo) {
-  var v = el.value.replace(/\D/g,'');
-  if (tipo==='cpf'){v=v.slice(0,11);el.value=v.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,'$1.$2.$3-$4').replace(/(\d{3})(\d{3})(\d{0,3})/,'$1.$2.$3').replace(/(\d{3})(\d{0,3})/,'$1.$2');}
-  else if(tipo==='tel'){v=v.slice(0,11);el.value=v.length>10?v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3'):v.replace(/(\d{2})(\d{4})(\d{0,4})/,'($1) $2-$3');}
-  else if(tipo==='cep'){v=v.slice(0,8);el.value=v.replace(/(\d{5})(\d{0,3})/,'$1-$2');}
+function mkCPF(el){
+  var v=el.value.replace(/\D/g,'').slice(0,11);
+  el.value=v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');
+}
+function mkTel(el){
+  var v=el.value.replace(/\D/g,'').slice(0,11);
+  el.value=v.length>10?v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3'):v.replace(/(\d{2})(\d{4})(\d{0,4})/,'($1) $2-$3');
+}
+function mkCEP(el){
+  var v=el.value.replace(/\D/g,'').slice(0,8);
+  el.value=v.replace(/(\d{5})(\d{0,3})/,'$1-$2');
+  if(v.length===8) buscaCEP(v);
+}
+function buscaCEP(cep){
+  fetch('https://viacep.com.br/ws/'+cep+'/json/')
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(!d.erro){
+        document.getElementById('endereco').value=d.logradouro||'';
+        document.getElementById('bairro').value=d.bairro||'';
+        document.getElementById('cidade').value=(d.localidade||'')+(d.uf?' - '+d.uf:'');
+      }
+    }).catch(function(){});
 }
 
-async function buscaCEP(el) {
-  var c = el.value.replace(/\D/g,'');
-  if (c.length < 8) return;
-  try {
-    var r = await fetch('https://viacep.com.br/ws/'+c+'/json/');
-    var d = await r.json();
-    if (!d.erro) {
-      document.getElementById('f-end').value    = d.logradouro||'';
-      document.getElementById('f-bairro').value = d.bairro||'';
-      document.getElementById('f-cidade').value = (d.localidade||'') + (d.uf?' – '+d.uf:'');
-    }
-  } catch(e){}
-}
+function gv(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
 
-function toBase64(file) {
+function toB64(file){
   return new Promise(function(res,rej){
-    var r = new FileReader();
-    r.onload  = function(e){ res(e.target.result); };
-    r.onerror = rej;
+    var r=new FileReader();
+    r.onload=function(e){res(e.target.result);};
+    r.onerror=rej;
     r.readAsDataURL(file);
   });
 }
 
-async function enviar(e) {
-  e.preventDefault();
+async function enviar(){
+  // Validate required text fields
+  var campos = [
+    {id:'nome',label:'Nome Completo'},
+    {id:'cpf',label:'CPF'},
+    {id:'nascimento',label:'Data de Nascimento'},
+    {id:'telefone',label:'WhatsApp'},
+    {id:'email',label:'E-mail'},
+    {id:'cep',label:'CEP'},
+    {id:'endereco',label:'Endereco'}
+  ];
+  for(var i=0;i<campos.length;i++){
+    if(!gv(campos[i].id)){
+      alert('Preencha o campo: '+campos[i].label);
+      document.getElementById(campos[i].id).focus();
+      return;
+    }
+  }
 
   // Validate required docs
-  var faltando = DOCS.filter(function(d){ return d.req && (!arquivos[d.id]||!arquivos[d.id].length); });
-  if (faltando.length) {
-    alert('Anexe os documentos obrigatórios:
-
-• ' + faltando.map(function(d){return d.label;}).join('
-• '));
-    document.getElementById('uploads-area').scrollIntoView({behavior:'smooth'});
+  var faltando=[];
+  DOCS_OBR.forEach(function(id){
+    if(!arquivos[id]||!arquivos[id].length) faltando.push(DOCS_LABELS[id]);
+  });
+  if(faltando.length){
+    alert('Anexe os documentos obrigatorios:\n\n- '+faltando.join('\n- '));
+    document.querySelector('.upbox').scrollIntoView({behavior:'smooth'});
     return;
   }
 
-  var btn = document.getElementById('btn-env');
-  btn.disabled = true;
-  document.getElementById('prog-area').style.display = 'block';
-
-  // Collect form data
-  var fd = new FormData(e.target);
-  var dados = {};
-  fd.forEach(function(v,k){ dados[k]=v; });
-
-  // Convert files to base64
-  var progBar = document.getElementById('prog-bar');
-  var progTxt = document.getElementById('prog-txt');
-  var docsB64 = {};
-  var allFiles = [];
-  DOCS.forEach(function(d){ (arquivos[d.id]||[]).forEach(function(f){ allFiles.push({id:d.id,label:d.label,file:f}); }); });
-
-  for (var i=0; i<allFiles.length; i++) {
-    progTxt.textContent = 'Preparando documento ' + (i+1) + ' de ' + allFiles.length + '...';
-    progBar.style.width = Math.round((i/allFiles.length)*70) + '%';
-    var item = allFiles[i];
-    var b64 = await toBase64(item.file);
-    if (!docsB64[item.id]) docsB64[item.id] = [];
-    docsB64[item.id].push({ nome: item.file.name, tipo: item.file.type, dados: b64 });
+  if(!document.getElementById('declara').checked){
+    alert('Marque a declaracao de veracidade para continuar.');
+    return;
   }
 
-  dados.documentos = JSON.stringify(docsB64);
-  progTxt.textContent = 'Enviando ao RH...';
-  progBar.style.width = '85%';
+  var btn=document.getElementById('btn-env');
+  btn.disabled=true;
+  document.getElementById('prog').style.display='block';
 
-  try {
-    await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      body: JSON.stringify(dados),
-      headers: { 'Content-Type': 'application/json' }
+  // Collect all files
+  var allFiles=[];
+  Object.keys(arquivos).forEach(function(id){
+    (arquivos[id]||[]).forEach(function(f){
+      allFiles.push({id:id,label:DOCS_LABELS[id]||id,file:f});
     });
-    progBar.style.width = '100%';
-    progTxt.textContent = 'Enviado!';
+  });
+
+  // Convert to base64
+  var docsB64={};
+  var pb=document.getElementById('pbar');
+  var pt=document.getElementById('ptxt');
+  for(var j=0;j<allFiles.length;j++){
+    pt.textContent='Preparando documento '+(j+1)+' de '+allFiles.length+'...';
+    pb.style.width=Math.round((j/allFiles.length)*75)+'%';
+    var item=allFiles[j];
+    var b64=await toB64(item.file);
+    if(!docsB64[item.id]) docsB64[item.id]=[];
+    docsB64[item.id].push({nome:item.file.name,tipo:item.file.type,dados:b64});
+  }
+
+  pt.textContent='Enviando ao RH...';
+  pb.style.width='88%';
+
+  var payload={
+    nome:gv('nome'), cpf:gv('cpf'), rg:gv('rg'), nascimento:gv('nascimento'),
+    sexo:gv('sexo'), estado_civil:gv('estado_civil'), naturalidade:gv('naturalidade'),
+    nome_mae:gv('nome_mae'), nome_pai:gv('nome_pai'),
+    telefone:gv('telefone'), email:gv('email'),
+    cep:gv('cep'), numero:gv('numero'), endereco:gv('endereco'),
+    bairro:gv('bairro'), cidade:gv('cidade'), complemento:gv('complemento'),
+    pis:gv('pis'), ctps:gv('ctps'), titulo:gv('titulo'),
+    militar:gv('militar'), cnh:gv('cnh'), cnh_cat:gv('cnh_cat'),
+    banco:gv('banco'), agencia:gv('agencia'), conta:gv('conta'),
+    tipo_conta:gv('tipo_conta'), pix:gv('pix'),
+    tam_camisa:gv('tam_camisa'), tam_calca:gv('tam_calca'),
+    tam_calcado:gv('tam_calcado'), tam_jaleco:gv('tam_jaleco'),
+    documentos:JSON.stringify(docsB64)
+  };
+
+  try{
+    await fetch(APPS_SCRIPT_URL,{
+      method:'POST',
+      body:JSON.stringify(payload)
+    });
+    pb.style.width='100%';
+    pt.textContent='Enviado com sucesso!';
     setTimeout(function(){
-      document.getElementById('form').style.display = 'none';
-      document.getElementById('tela-sucesso').style.display = 'block';
+      document.getElementById('form').style.display='none';
+      document.getElementById('sucesso').style.display='block';
       window.scrollTo(0,0);
-    }, 800);
-  } catch(err) {
-    btn.disabled = false;
-    document.getElementById('prog-area').style.display = 'none';
-    alert('Erro ao enviar. Verifique sua conexão e tente novamente.');
+    },800);
+  }catch(err){
+    btn.disabled=false;
+    document.getElementById('prog').style.display='none';
+    alert('Erro ao enviar. Verifique sua conexao e tente novamente.\n'+err.message);
   }
 }
 </script>
