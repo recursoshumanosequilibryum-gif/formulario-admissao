@@ -306,7 +306,7 @@ function criarUploadArea(doc) {
       doc.label + (doc.req ? ' <span style="color:#c0392b">*</span>' : ' <span style="font-size:10px;color:#888;font-weight:400;text-transform:none;">(opcional)</span>') +
     '</label>' +
     '<div class="upload-area" id="area-' + doc.id + '">' +
-      '<input type="file" accept=".jpg,.jpeg,.png,.pdf" ' + (doc.req ? 'required' : '') + ' multiple id="inp-' + doc.id + '" onchange="adicionarArquivos(\'' + doc.id + '\',this)">' +
+      '<input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple id="inp-' + doc.id + '" onchange="adicionarArquivos(\'' + doc.id + '\',this)">' +
       '<div class="icon">📎</div>' +
       '<div class="label">Clique para anexar</div>' +
       '<p>JPG, PNG ou PDF · Múltiplos arquivos permitidos</p>' +
@@ -335,6 +335,17 @@ function renderFileList(docId) {
       '<button type="button" class="rm" onclick="removerArquivo(\'' + docId + '\',' + i + ')">×</button>' +
     '</div>';
   }).join('');
+  // Update area border to show if file was added
+  var area = document.getElementById('area-' + docId);
+  if (area) {
+    if (files.length > 0) {
+      area.style.borderColor = '#2e7d5e';
+      area.style.background = '#f0faf5';
+    } else {
+      area.style.borderColor = '';
+      area.style.background = '';
+    }
+  }
 }
 
 function removerArquivo(docId, idx) {
@@ -384,9 +395,40 @@ async function buscarCEP(el) {
 // ── Submeter ──
 async function submeter(e) {
   e.preventDefault();
+
+  // Validate required documents manually
+  var docsFaltando = [];
+  DOCS_NECESSARIOS.forEach(function(doc) {
+    if (doc.req && (!arquivosAnexos[doc.id] || !arquivosAnexos[doc.id].length)) {
+      docsFaltando.push(doc.label);
+    }
+  });
+  if (docsFaltando.length) {
+    alert('Por favor, anexe os seguintes documentos obrigatórios:\n\n• ' + docsFaltando.join('\n• '));
+    // Scroll to docs section
+    document.getElementById('docs-container').scrollIntoView({behavior:'smooth'});
+    return;
+  }
+
   var btn = document.getElementById('btn-enviar');
   btn.disabled = true;
   btn.textContent = '⏳ Gerando arquivo...';
+
+  // Validate required documents
+  var docsObrigatorios = DOCS_NECESSARIOS.filter(function(d){ return d.req; });
+  var docsFaltando = docsObrigatorios.filter(function(d){
+    return !arquivosAnexos[d.id] || arquivosAnexos[d.id].length === 0;
+  });
+  if (docsFaltando.length > 0) {
+    alert('Por favor, anexe os seguintes documentos obrigatórios:\n\n' +
+      docsFaltando.map(function(d){ return '• ' + d.label; }).join('\n'));
+    btn.disabled = false;
+    btn.textContent = '📤 Enviar Ficha de Admissão';
+    // Scroll to first missing doc
+    var firstMissing = document.getElementById('area-' + docsFaltando[0].id);
+    if (firstMissing) firstMissing.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
 
   // Collect data
   function gv(id) { var el=document.getElementById(id); return el?el.value.trim():''; }
