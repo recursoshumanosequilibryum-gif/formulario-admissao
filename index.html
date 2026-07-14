@@ -451,21 +451,76 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#2e7d5e;}
 
   <!-- DEPENDENTES -->
   <div class="card">
-    <div class="ch"><h2>👨‍👩‍👧 10. Dependentes</h2></div>
+    <div class="ch"><h2>&#128106; 10. Dependentes</h2></div>
     <div class="cb">
-      <p style="font-size:12.5px;color:#666;margin-bottom:14px;">Informe os seus dependentes (filhos, cônjuge ou outros) para fins de declaração de IR e benefícios.</p>
-      <div id="dependentes-lista"></div>
-      <button type="button" onclick="addDependente()" style="background:none;border:1.5px dashed #2e7d5e;color:#2e7d5e;padding:10px 16px;border-radius:7px;font-size:12.5px;font-weight:700;cursor:pointer;width:100%;margin-bottom:10px;">+ Adicionar Dependente</button>
+      <div class="row full" style="margin-bottom:14px;">
+        <div class="fg">
+          <label class="lbl">Possui dependentes? <span class="req">*</span></label>
+          <select id="tem_dependente" required onchange="toggleDependentes(this.value)"
+            style="width:100%;padding:8px 11px;border:1.5px solid #cdd8e3;border-radius:7px;font-size:13px;font-family:inherit;">
+            <option value="">Selecione</option>
+            <option value="nao">Não possuo dependentes</option>
+            <option value="sim">Sim, possuo dependentes</option>
+          </select>
+        </div>
+      </div>
 
-      <span class="doc-nome" style="display:block;margin-top:8px;">Documentos dos Dependentes <span class="doc-opt-tag">OPCIONAL</span></span>
-      <div class="upbox">
-        <label class="uplabel">
-          <span class="uico">📎</span>
-          <span class="utitle">Clique para anexar documentos dos dependentes</span>
-          <span class="usub">RG, certidão de nascimento ou casamento – JPG, PNG ou PDF</span>
-          <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('dep_docs',this)">
-        </label>
-        <div class="flist" id="fl-dep_docs"></div>
+      <div id="dep-area" style="display:none;">
+        <div id="dependentes-lista"></div>
+        <button type="button" onclick="addDependente()"
+          style="background:none;border:1.5px dashed #2e7d5e;color:#2e7d5e;padding:10px 16px;border-radius:7px;font-size:12.5px;font-weight:700;cursor:pointer;width:100%;margin-bottom:16px;">
+          + Adicionar Dependente
+        </button>
+
+        <!-- Documentos dos dependentes -->
+        <div style="background:#fff8e1;border-radius:9px;padding:12px 14px;border:1px solid #ffe082;font-size:12.5px;color:#7b6000;margin-bottom:14px;">
+          &#9888; <strong>Documentos obrigatórios para cada dependente:</strong><br>
+          Certidão de nascimento ou casamento · CPF · Caderneta de vacinação (menores) · Declaração de frequência escolar (a partir de 7 anos)
+        </div>
+
+        <span class="doc-nome">Certidão de Nascimento / Casamento <span class="doc-req-tag">OBRIGATÓRIO</span></span>
+        <div class="upbox">
+          <label class="uplabel">
+            <span class="uico">&#128196;</span>
+            <span class="utitle">Clique para anexar Certidão de Nascimento ou Casamento</span>
+            <span class="usub">De todos os dependentes – JPG, PNG ou PDF</span>
+            <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('dep_certidao',this)">
+          </label>
+          <div class="flist" id="fl-dep_certidao"></div>
+        </div>
+
+        <span class="doc-nome" style="margin-top:12px;display:block;">CPF dos Dependentes <span class="doc-req-tag">OBRIGATÓRIO</span></span>
+        <div class="upbox">
+          <label class="uplabel">
+            <span class="uico">&#128196;</span>
+            <span class="utitle">Clique para anexar CPF dos dependentes</span>
+            <span class="usub">JPG, PNG ou PDF</span>
+            <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('dep_cpf',this)">
+          </label>
+          <div class="flist" id="fl-dep_cpf"></div>
+        </div>
+
+        <span class="doc-nome" style="margin-top:12px;display:block;">Caderneta de Vacinação <span class="doc-req-tag">OBRIGATÓRIO para menores</span></span>
+        <div class="upbox">
+          <label class="uplabel">
+            <span class="uico">&#128138;</span>
+            <span class="utitle">Clique para anexar a Caderneta de Vacinação</span>
+            <span class="usub">Para filhos menores de idade – JPG, PNG ou PDF</span>
+            <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('dep_vacina',this)">
+          </label>
+          <div class="flist" id="fl-dep_vacina"></div>
+        </div>
+
+        <span class="doc-nome" style="margin-top:12px;display:block;">Declaração de Frequência Escolar <span class="doc-req-tag">OBRIGATÓRIO a partir de 7 anos</span></span>
+        <div class="upbox">
+          <label class="uplabel">
+            <span class="uico">&#127979;</span>
+            <span class="utitle">Clique para anexar Declaração de Frequência Escolar</span>
+            <span class="usub">Para dependentes a partir de 7 anos – JPG, PNG ou PDF</span>
+            <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('dep_escola',this)">
+          </label>
+          <div class="flist" id="fl-dep_escola"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -507,7 +562,9 @@ var DOCS_LABELS = {
   rg:'RG', cpf_doc:'CPF', titulo_doc:'Titulo de Eleitor',
   compres:'Comprovante de Residencia', foto:'Foto para Cracha',
   ctps_doc:'CTPS', pis_doc:'PIS/NIT', banco_doc:'Comprovante Bancario', aso:'ASO',
-  historico:'Historico Escolar/Diploma', certificado:'Certificado Superior/Pos', dep_docs:'Documentos Dependentes'
+  historico:'Historico Escolar/Diploma', certificado:'Certificado Superior/Pos',
+  dep_certidao:'Certidao de Nascimento/Casamento', dep_cpf:'CPF dos Dependentes',
+  dep_vacina:'Caderneta de Vacinacao', dep_escola:'Declaracao de Frequencia Escolar'
 };
 var arquivos = {};
 
@@ -573,6 +630,13 @@ function toB64(file){
 
 async function enviar(){
   // Validate required text fields
+  // Validate tem_dependente
+  if (!gv('tem_dependente')) {
+    alert('Informe se possui dependentes.');
+    document.getElementById('tem_dependente').focus();
+    return;
+  }
+
   var campos = [
     {id:'nome',label:'Nome Completo'},
     {id:'cpf',label:'CPF'},
@@ -591,9 +655,13 @@ async function enviar(){
   }
 
   // Validate required docs
+  var temDep = (document.getElementById('tem_dependente')||{}).value === 'sim';
+  var DOCS_OBR_DEP = temDep ? ['dep_certidao','dep_cpf','dep_vacina','dep_escola'] : [];
+  var todosObr = DOCS_OBR.concat(DOCS_OBR_DEP);
+
   var faltando=[];
-  DOCS_OBR.forEach(function(id){
-    if(!arquivos[id]||!arquivos[id].length) faltando.push(DOCS_LABELS[id]);
+  todosObr.forEach(function(id){
+    if(!arquivos[id]||!arquivos[id].length) faltando.push(DOCS_LABELS[id]||id);
   });
   if(faltando.length){
     alert('Anexe os documentos obrigatorios:\n\n- '+faltando.join('\n- '));
@@ -652,6 +720,7 @@ async function enviar(){
     curso:gv('curso'),
     instituicao:gv('instituicao'),
     ano_conclusao:gv('ano_conclusao'),
+    tem_dependente:gv('tem_dependente'),
     usa_vt:gv('usa_vt'),
     vale_transporte:JSON.stringify(getVTData()),
     dependentes:JSON.stringify(getDependentes())
@@ -767,6 +836,12 @@ function addDependente() {
         '</select></div>' +
     '</div>';
   lista.appendChild(div);
+}
+
+// ── TOGGLE DEPENDENTES ──
+function toggleDependentes(val) {
+  var area = document.getElementById('dep-area');
+  if (area) area.style.display = val === 'sim' ? 'block' : 'none';
 }
 
 // ── COLLECT DEPENDENTES DATA ──
