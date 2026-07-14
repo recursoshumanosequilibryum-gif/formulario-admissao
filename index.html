@@ -104,6 +104,21 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#2e7d5e;}
         <div class="fg"><label class="lbl">Naturalidade</label>
           <input type="text" id="naturalidade" placeholder="Cidade – UF"></div>
       </div>
+      <div class="row full">
+        <div class="fg">
+          <label class="lbl">Autodeclaração Étnico-Racial <span class="req">*</span></label>
+          <select id="etnia" required style="width:100%;padding:8px 11px;border:1.5px solid #cdd8e3;border-radius:7px;font-size:13px;font-family:inherit;">
+            <option value="">Selecione</option>
+            <option value="Branco">Branco(a)</option>
+            <option value="Pardo">Pardo(a)</option>
+            <option value="Preto">Preto(a)</option>
+            <option value="Amarelo">Amarelo(a)</option>
+            <option value="Indigena">Indígena</option>
+            <option value="Nao declarar">Prefiro não declarar</option>
+          </select>
+          <span style="font-size:11px;color:#888;margin-top:3px;">Conforme classificação do IBGE. Informação utilizada exclusivamente para fins estatísticos e de políticas de diversidade.</span>
+        </div>
+      </div>
       <div class="row">
         <div class="fg"><label class="lbl">Nome da Mae</label>
           <input type="text" id="nome_mae" placeholder="Nome completo"></div>
@@ -643,6 +658,8 @@ async function enviar(){
     {id:'nascimento',label:'Data de Nascimento'},
     {id:'telefone',label:'WhatsApp'},
     {id:'email',label:'E-mail'},
+    {id:'etnia',label:'Autodeclaracao Etnico-Racial'},
+    {id:'etnia',label:'Autodeclaracao Etnico-Racial'},
     {id:'cep',label:'CEP'},
     {id:'endereco',label:'Endereco'}
   ];
@@ -720,6 +737,8 @@ async function enviar(){
     curso:gv('curso'),
     instituicao:gv('instituicao'),
     ano_conclusao:gv('ano_conclusao'),
+    etnia:gv('etnia'),
+    etnia:gv('etnia'),
     tem_dependente:gv('tem_dependente'),
     usa_vt:gv('usa_vt'),
     vale_transporte:JSON.stringify(getVTData()),
