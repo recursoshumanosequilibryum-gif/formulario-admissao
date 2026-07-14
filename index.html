@@ -300,7 +300,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#2e7d5e;}
       </div>
 
       <!-- CTPS -->
-      <span class="doc-nome">CTPS – Carteira de Trabalho <span class="doc-opt-tag">OPCIONAL</span></span>
+      <span class="doc-nome">CTPS – Carteira de Trabalho <span class="doc-req-tag">OBRIGATÓRIO</span></span>
       <div class="upbox">
         <label class="uplabel">
           <span class="uico">📷</span>
@@ -351,8 +351,127 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#2e7d5e;}
   </div>
 
   <!-- DECLARACAO -->
+  <!-- VALE TRANSPORTE -->
   <div class="card">
-    <div class="ch"><h2>✅ 8. Declaração</h2></div>
+    <div class="ch"><h2>🚌 8. Vale Transporte</h2></div>
+    <div class="cb">
+      <p style="font-size:12.5px;color:#666;margin-bottom:14px;">Informe as linhas de transporte utilizadas para se deslocar ao trabalho.</p>
+      <div class="row full">
+        <div class="fg"><label class="lbl">Utiliza Vale Transporte? <span class="req">*</span></label>
+          <select id="usa_vt" required onchange="toggleVT(this.value)" style="width:100%;padding:8px 11px;border:1.5px solid #cdd8e3;border-radius:7px;font-size:13px;font-family:inherit;">
+            <option value="">Selecione</option>
+            <option value="sim">Sim</option>
+            <option value="nao">Não (tenho carro/moto próprio)</option>
+          </select></div>
+      </div>
+      <div id="vt-campos" style="display:none;">
+        <div id="vt-linhas">
+          <div class="vt-linha" style="background:#f7fbf9;border-radius:8px;padding:12px;margin-bottom:10px;border:1px solid #c8e6d4;">
+            <div style="font-size:12px;font-weight:700;color:#1f5c44;margin-bottom:8px;">Linha 1</div>
+            <div class="row tri">
+              <div class="fg"><label class="lbl">Tipo</label>
+                <select class="vt-tipo" style="width:100%;padding:7px 10px;border:1.5px solid #cdd8e3;border-radius:7px;font-size:13px;font-family:inherit;">
+                  <option value="">Selecione</option>
+                  <option>Ônibus Municipal</option>
+                  <option>Ônibus Intermunicipal</option>
+                  <option>Metrô</option>
+                  <option>CPTM / Trem</option>
+                  <option>Van / Micro-ônibus</option>
+                  <option>Ferry Boat</option>
+                </select></div>
+              <div class="fg"><label class="lbl">Número/Nome da Linha</label>
+                <input type="text" class="vt-linha-num" placeholder="Ex.: 8012-10"></div>
+              <div class="fg"><label class="lbl">Valor por Passagem (R$)</label>
+                <input type="number" class="vt-valor" min="0" step="0.01" placeholder="Ex.: 5,30"></div>
+            </div>
+          </div>
+        </div>
+        <button type="button" onclick="addLinhaVT()" style="background:none;border:1.5px dashed #2e7d5e;color:#2e7d5e;padding:8px 16px;border-radius:7px;font-size:12.5px;font-weight:700;cursor:pointer;width:100%;margin-bottom:4px;">+ Adicionar outra linha</button>
+        <div style="background:#e8f5ee;border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12.5px;color:#1f5c44;">
+          &#128203; <strong>Total diário:</strong> <span id="vt-total">R$ 0,00</span> (ida + volta = <span id="vt-total-dia">R$ 0,00</span>)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMAÇÃO ACADÊMICA -->
+  <div class="card">
+    <div class="ch"><h2>🎓 9. Formação Acadêmica</h2></div>
+    <div class="cb">
+      <div class="row">
+        <div class="fg"><label class="lbl">Grau de Escolaridade <span class="req">*</span></label>
+          <select id="escolaridade" required style="width:100%;padding:8px 11px;border:1.5px solid #cdd8e3;border-radius:7px;font-size:13px;font-family:inherit;">
+            <option value="">Selecione</option>
+            <option>Fundamental Incompleto</option>
+            <option>Fundamental Completo</option>
+            <option>Médio Incompleto</option>
+            <option>Médio Completo</option>
+            <option>Técnico</option>
+            <option>Superior Incompleto</option>
+            <option>Superior Completo</option>
+            <option>Pós-Graduação / MBA</option>
+            <option>Mestrado</option>
+            <option>Doutorado</option>
+          </select></div>
+        <div class="fg"><label class="lbl">Curso / Área</label>
+          <input type="text" id="curso" placeholder="Ex.: Fisioterapia, Administração"></div>
+      </div>
+      <div class="row">
+        <div class="fg"><label class="lbl">Instituição de Ensino</label>
+          <input type="text" id="instituicao" placeholder="Nome da escola ou faculdade"></div>
+        <div class="fg"><label class="lbl">Ano de Conclusão</label>
+          <input type="text" id="ano_conclusao" placeholder="Ex.: 2022"></div>
+      </div>
+
+      <div style="margin-top:14px;">
+        <span class="doc-nome">Histórico Escolar / Diploma / Certificado <span class="doc-req-tag">OBRIGATÓRIO</span></span>
+        <div class="upbox">
+          <label class="uplabel">
+            <span class="uico">🎓</span>
+            <span class="utitle">Clique para anexar o Histórico Escolar ou Diploma</span>
+            <span class="usub">Ensino Médio, Superior, Técnico ou Pós-Graduação – JPG, PNG ou PDF</span>
+            <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('historico',this)">
+          </label>
+          <div class="flist" id="fl-historico"></div>
+        </div>
+
+        <span class="doc-nome" style="margin-top:12px;display:block;">Certificado de Curso Superior / Pós-Graduação <span class="doc-opt-tag">OPCIONAL</span></span>
+        <div class="upbox">
+          <label class="uplabel">
+            <span class="uico">📜</span>
+            <span class="utitle">Clique para anexar Certificado de Curso Superior ou Pós</span>
+            <span class="usub">JPG, PNG ou PDF</span>
+            <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('certificado',this)">
+          </label>
+          <div class="flist" id="fl-certificado"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEPENDENTES -->
+  <div class="card">
+    <div class="ch"><h2>👨‍👩‍👧 10. Dependentes</h2></div>
+    <div class="cb">
+      <p style="font-size:12.5px;color:#666;margin-bottom:14px;">Informe os seus dependentes (filhos, cônjuge ou outros) para fins de declaração de IR e benefícios.</p>
+      <div id="dependentes-lista"></div>
+      <button type="button" onclick="addDependente()" style="background:none;border:1.5px dashed #2e7d5e;color:#2e7d5e;padding:10px 16px;border-radius:7px;font-size:12.5px;font-weight:700;cursor:pointer;width:100%;margin-bottom:10px;">+ Adicionar Dependente</button>
+
+      <span class="doc-nome" style="display:block;margin-top:8px;">Documentos dos Dependentes <span class="doc-opt-tag">OPCIONAL</span></span>
+      <div class="upbox">
+        <label class="uplabel">
+          <span class="uico">📎</span>
+          <span class="utitle">Clique para anexar documentos dos dependentes</span>
+          <span class="usub">RG, certidão de nascimento ou casamento – JPG, PNG ou PDF</span>
+          <input type="file" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="addDoc('dep_docs',this)">
+        </label>
+        <div class="flist" id="fl-dep_docs"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><h2>✅ 11. Declaração</h2></div>
     <div class="cb">
       <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;">
         <input type="checkbox" id="declara" required style="width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:#2e7d5e;">
@@ -383,11 +502,12 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#2e7d5e;}
 <script>
 var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyS99myEmIOhAehF3_J9i-7_ot0POwU3_jzWJZOGhy194egzr3K8WtkjaKnNghrSm0EHw/exec';
 
-var DOCS_OBR = ['rg','cpf_doc','titulo_doc','compres','foto'];
+var DOCS_OBR = ['rg','cpf_doc','titulo_doc','compres','foto','ctps_doc','historico'];
 var DOCS_LABELS = {
   rg:'RG', cpf_doc:'CPF', titulo_doc:'Titulo de Eleitor',
   compres:'Comprovante de Residencia', foto:'Foto para Cracha',
-  ctps_doc:'CTPS', pis_doc:'PIS/NIT', banco_doc:'Comprovante Bancario', aso:'ASO'
+  ctps_doc:'CTPS', pis_doc:'PIS/NIT', banco_doc:'Comprovante Bancario', aso:'ASO',
+  historico:'Historico Escolar/Diploma', certificado:'Certificado Superior/Pos', dep_docs:'Documentos Dependentes'
 };
 var arquivos = {};
 
@@ -527,7 +647,14 @@ async function enviar(){
     tipo_conta:gv('tipo_conta'), pix:gv('pix'),
     tam_camisa:gv('tam_camisa'), tam_calca:gv('tam_calca'),
     tam_calcado:gv('tam_calcado'), tam_jaleco:gv('tam_jaleco'),
-    documentos:JSON.stringify(docsB64)
+    documentos:JSON.stringify(docsB64),
+    escolaridade:gv('escolaridade'),
+    curso:gv('curso'),
+    instituicao:gv('instituicao'),
+    ano_conclusao:gv('ano_conclusao'),
+    usa_vt:gv('usa_vt'),
+    vale_transporte:JSON.stringify(getVTData()),
+    dependentes:JSON.stringify(getDependentes())
   };
 
   try{
@@ -553,6 +680,127 @@ async function enviar(){
       window.scrollTo(0,0);
     },800);
   }
+}
+
+// ── VALE TRANSPORTE ──
+function toggleVT(val) {
+  document.getElementById('vt-campos').style.display = val === 'sim' ? 'block' : 'none';
+  calcVT();
+}
+
+function addLinhaVT() {
+  var container = document.getElementById('vt-linhas');
+  var n = container.querySelectorAll('.vt-linha').length + 1;
+  var div = document.createElement('div');
+  div.className = 'vt-linha';
+  div.style.cssText = 'background:#f7fbf9;border-radius:8px;padding:12px;margin-bottom:10px;border:1px solid #c8e6d4;';
+  div.innerHTML =
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">' +
+      '<span style="font-size:12px;font-weight:700;color:#1f5c44;">Linha ' + n + '</span>' +
+      '<button type="button" onclick="this.closest(\'.vt-linha\').remove();calcVT();" ' +
+        'style="background:none;border:none;color:#c0392b;cursor:pointer;font-size:14px;">✕ Remover</button>' +
+    '</div>' +
+    '<div class="row tri">' +
+      '<div class="fg"><label class="lbl">Tipo</label>' +
+        '<select class="vt-tipo" onchange="calcVT()" style="width:100%;padding:7px 10px;border:1.5px solid #cdd8e3;border-radius:7px;font-size:13px;font-family:inherit;">' +
+          '<option value="">Selecione</option>' +
+          '<option>Onibus Municipal</option><option>Onibus Intermunicipal</option>' +
+          '<option>Metro</option><option>CPTM / Trem</option>' +
+          '<option>Van / Micro-onibus</option><option>Ferry Boat</option>' +
+        '</select></div>' +
+      '<div class="fg"><label class="lbl">Numero/Nome</label>' +
+        '<input type="text" class="vt-linha-num" placeholder="Ex.: 8012-10" style="width:100%;padding:7px 10px;border:1.5px solid #cdd8e3;border-radius:7px;font-size:13px;font-family:inherit;"></div>' +
+      '<div class="fg"><label class="lbl">Valor por Passagem (R$)</label>' +
+        '<input type="number" class="vt-valor" min="0" step="0.01" placeholder="5,30" oninput="calcVT()" style="width:100%;padding:7px 10px;border:1.5px solid #cdd8e3;border-radius:7px;font-size:13px;font-family:inherit;"></div>' +
+    '</div>';
+  container.appendChild(div);
+}
+
+function calcVT() {
+  var linhas = document.querySelectorAll('.vt-valor');
+  var total = 0;
+  linhas.forEach(function(el){ total += parseFloat(el.value)||0; });
+  var totalDia = total * 2; // ida + volta
+  document.getElementById('vt-total').textContent = 'R$ ' + total.toFixed(2).replace('.',',');
+  document.getElementById('vt-total-dia').textContent = 'R$ ' + totalDia.toFixed(2).replace('.',',');
+}
+
+// Add oninput to first VT line
+document.querySelectorAll('.vt-valor').forEach(function(el){
+  el.addEventListener('input', calcVT);
+});
+
+// ── DEPENDENTES ──
+var depCount = 0;
+
+function addDependente() {
+  depCount++;
+  var n = depCount;
+  var lista = document.getElementById('dependentes-lista');
+  var div = document.createElement('div');
+  div.id = 'dep-' + n;
+  div.style.cssText = 'background:#f7fbf9;border-radius:10px;padding:14px;margin-bottom:12px;border:1.5px solid #c8e6d4;';
+  div.innerHTML =
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">' +
+      '<span style="font-size:12.5px;font-weight:700;color:#1f5c44;">Dependente ' + n + '</span>' +
+      '<button type="button" onclick="document.getElementById(\'dep-'+n+'\').remove();" ' +
+        'style="background:none;border:none;color:#c0392b;cursor:pointer;font-size:14px;font-weight:700;">✕ Remover</button>' +
+    '</div>' +
+    '<div class="row tri">' +
+      '<div class="fg"><label class="lbl">Nome Completo</label>' +
+        '<input type="text" id="dep-nome-'+n+'" placeholder="Nome do dependente" style="width:100%;padding:7px 10px;border:1.5px solid #cdd8e3;border-radius:7px;font-size:13px;font-family:inherit;"></div>' +
+      '<div class="fg"><label class="lbl">CPF</label>' +
+        '<input type="text" id="dep-cpf-'+n+'" placeholder="000.000.000-00" style="width:100%;padding:7px 10px;border:1.5px solid #cdd8e3;border-radius:7px;font-size:13px;font-family:inherit;"></div>' +
+      '<div class="fg"><label class="lbl">Nascimento</label>' +
+        '<input type="date" id="dep-nas-'+n+'" style="width:100%;padding:7px 10px;border:1.5px solid #cdd8e3;border-radius:7px;font-size:13px;font-family:inherit;"></div>' +
+    '</div>' +
+    '<div class="row">' +
+      '<div class="fg"><label class="lbl">Parentesco</label>' +
+        '<select id="dep-par-'+n+'" style="width:100%;padding:7px 10px;border:1.5px solid #cdd8e3;border-radius:7px;font-size:13px;font-family:inherit;">' +
+          '<option value="">Selecione</option>' +
+          '<option>Filho(a)</option><option>Conjuge</option><option>Companheiro(a)</option>' +
+          '<option>Pai</option><option>Mae</option><option>Outro</option>' +
+        '</select></div>' +
+      '<div class="fg"><label class="lbl">Sexo</label>' +
+        '<select id="dep-sex-'+n+'" style="width:100%;padding:7px 10px;border:1.5px solid #cdd8e3;border-radius:7px;font-size:13px;font-family:inherit;">' +
+          '<option value="">--</option><option>Masculino</option><option>Feminino</option>' +
+        '</select></div>' +
+    '</div>';
+  lista.appendChild(div);
+}
+
+// ── COLLECT DEPENDENTES DATA ──
+function getDependentes() {
+  var lista = document.getElementById('dependentes-lista');
+  var divs = lista.querySelectorAll('[id^="dep-"]');
+  var deps = [];
+  divs.forEach(function(div) {
+    var n = div.id.replace('dep-','');
+    var nome = (document.getElementById('dep-nome-'+n)||{}).value||'';
+    if (!nome) return;
+    deps.push({
+      nome: nome,
+      cpf:  (document.getElementById('dep-cpf-'+n)||{}).value||'',
+      nas:  (document.getElementById('dep-nas-'+n)||{}).value||'',
+      parentesco: (document.getElementById('dep-par-'+n)||{}).value||'',
+      sexo: (document.getElementById('dep-sex-'+n)||{}).value||''
+    });
+  });
+  return deps;
+}
+
+// ── COLLECT VT DATA ──
+function getVTData() {
+  if ((document.getElementById('usa_vt')||{}).value !== 'sim') return [];
+  var linhas = document.querySelectorAll('.vt-linha');
+  var vt = [];
+  linhas.forEach(function(linha) {
+    var tipo  = (linha.querySelector('.vt-tipo')||{}).value||'';
+    var num   = (linha.querySelector('.vt-linha-num')||{}).value||'';
+    var valor = parseFloat((linha.querySelector('.vt-valor')||{}).value)||0;
+    if (tipo || num || valor) vt.push({ tipo:tipo, linha:num, valor:valor });
+  });
+  return vt;
 }
 </script>
 </body>
